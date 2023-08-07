@@ -1,0 +1,10 @@
+<div class="container">
+    <h2>Listado de Encuestas</h2>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let encuesta of encuestas">
+            <h4>{{ encuesta.title }}</h4>
+            <p>{{ encuesta.description }}</p>
+            <!-- Agregar más detalles de la encuesta aquí -->
+        </li>
+    </ul>
+</div>
