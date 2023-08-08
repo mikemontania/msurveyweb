@@ -11,6 +11,7 @@ import { PagesModule } from './pages/pages.module';
 import { InterceptorService } from './services/service.index';
 import { ServiceModule } from './services/service.module';
 import { NopagefoundComponent } from './template/nopagefound/nopagefound.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NopagefoundComponent } from './template/nopagefound/nopagefound.compone
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(), // ToastrModule added
     AppRoutingModule,
     PagesModule,
     AuthModule,

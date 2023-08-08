@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Answer } from 'src/app/models/answer.model';
@@ -15,21 +16,28 @@ import Swal from 'sweetalert2';
   styleUrls: ['./encuesta.component.css']
 })
 export class EncuestaComponent implements OnInit {
+  surveyForm: FormGroup;
+  newQuestion: Question = new Question();
+  questionTypes = ['checkbox', 'radiobutton', 'input', 'textarea'];
   survey: Survey = new Survey();
   question: Question = new Question();
   answer: Answer = new Answer();
   user: User; 
-
+  questions: Question[]=[];
+  answers: Answer[]=[];
+  titleEditMode = false;
+  descriptionEditMode = false;
   constructor(
     private _loginService: LoginService,
     private toastr: ToastrService,
     private _encuestasServices: ApiService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder) {
 
   this.survey.codSurvey=null;
-  this.survey.title= '';
-  this.survey.description= '';
+  this.survey.title= 'Titulo';
+  this.survey.description= 'Descripcion';
   this.survey.img= '';
   this.survey.active= true;
   this.survey.creationDate =new Date();
@@ -39,7 +47,8 @@ export class EncuestaComponent implements OnInit {
 
   this.question.codQuestion =null;
   this.question.questionText='';
-  this.question.questionType='';
+  this.question.alignment='';
+  this.question.bold='';   
   this.question.img='';
   this.question.codSurvey=null;
   this.question.answer = []; 
@@ -47,7 +56,12 @@ export class EncuestaComponent implements OnInit {
   this.answer.codAnswer = null;
   this.answer.answerType= '';
   this.answer.answerText= '';
-  this.answer.codQuestion = null; 
+  this.answer.codQuestion = null;
+  this.surveyForm = this.fb.group({
+    title: ['', Validators.required],
+    description: [''],
+    questions: []
+  }); 
   }
 
   ngOnInit() {
@@ -61,6 +75,13 @@ export class EncuestaComponent implements OnInit {
       }
     });
   }
+
+  handleQuestionCreated(question: any) {
+    console.log('Pregunta creada en el componente padre:', question);
+    // Aquí puedes realizar cualquier otra lógica con la pregunta creada
+  }
+
+
 
   create(): void {
     this._encuestasServices.createSurvey(this.survey)
@@ -86,6 +107,55 @@ export class EncuestaComponent implements OnInit {
     this.toastr.error('Favor completar todos los campos correctamente', 'Invalido',
       { timeOut: 1500 });
   }
+  toggleTitleEditMode() {
+    this.titleEditMode = !this.titleEditMode;
+  }
+
+  toggleDescriptionEditMode() {
+    this.descriptionEditMode = !this.descriptionEditMode;
+  }
+
+
+  addQuestion() {
+    const question = { ...this.newQuestion }; // Clonamos la pregunta
+    this.surveyForm.get('questions').value.push(question);
+    this.newQuestion = new Question();
+  }
+
+  addAnswer(question: Question) {
+    if (!question.answer) {
+      question.answer = [];
+    }
+    question.answer.push(new Answer());
+  }
+
+  removeAnswer(question: Question, index: number) {
+    if (question.answer) {
+      question.answer.splice(index, 1);
+    }
+  }
+
+  removeQuestion(index: number) {
+    this.surveyForm.get('questions').value.splice(index, 1);
+  }
+
+  submitSurvey() {
+    if (this.surveyForm.valid) {
+      const survey: Survey = this.surveyForm.value;
+      console.log(survey); // Aquí puedes enviar la encuesta al servidor o realizar las acciones necesarias
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   error(err) {
     this.toastr.error(err, 'Error',

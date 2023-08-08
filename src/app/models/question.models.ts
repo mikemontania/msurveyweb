@@ -1,12 +1,13 @@
 import { Answer } from "./answer.model";
-import { Options } from "./option.models";
-
+ 
 export class Question {
 
 
   codQuestion?: number;
   questionText: string;
   questionType: string;
+  alignment: string;
+  bold: string;
   img?: string;
   codSurvey: number;
   answer?: Answer[];

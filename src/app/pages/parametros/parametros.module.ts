@@ -6,8 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
-import { NgbPaginationModule, NgbAlertModule, NgbModule, NgbHighlight } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbPaginationModule,   NgbModule,   } from '@ng-bootstrap/ng-bootstrap'; 
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   declarations: [
@@ -23,12 +23,10 @@ import { NgbPaginationModule, NgbAlertModule, NgbModule, NgbHighlight } from '@n
     FormsModule,
     ReactiveFormsModule,
     ParametrosRoutingModule,
-    RouterModule,
-    NgOptionHighlightModule,
+    RouterModule, 
     NgbPaginationModule,
     NgbModule,
-
-
+    ComponentsModule
   ]
 })
 export class ParametrosModule { }

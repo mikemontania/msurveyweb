@@ -1,46 +1,55 @@
 <div class="card ">
-    <div class="card-header label-themecolor">
+    <div class="card-header  bg-dark text-white">
         <h4 *ngIf="!survey.codSurvey" class="m-b-0 text-white">Crear Encuesta</h4>
         <h4 *ngIf="survey.codSurvey" class="m-b-0 text-white">Actualizar Encuesta</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body mt-5">
 
         <form #surveyForm="ngForm">
+            <div class="header">
+                <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
+                <div class="text-center">
+                    <h1>
+                        <ng-container *ngIf="!titleEditMode">{{ survey.title }}</ng-container>
+                        <ng-container *ngIf="titleEditMode">
+                            <input type="text" class="form-control" [(ngModel)]="survey.title" name=" title">
+                        </ng-container>
+                    </h1>
+                    <p>
+                        <ng-container *ngIf="!descriptionEditMode">{{ survey.description }}</ng-container>
+                        <ng-container *ngIf="descriptionEditMode">
+                            <textarea class="form-control" [(ngModel)]="survey.description"
+                                name="description"></textarea>
+                        </ng-container>
+                    </p>
+                    <button class="btn btn-sm btn-primary" *ngIf="!titleEditMode" (click)="toggleTitleEditMode()">
+                        <i class="fa fa-edit"></i> Editar Título
+                    </button>
+                    <button class="btn btn-sm btn-primary" *ngIf="titleEditMode" (click)="toggleTitleEditMode()">
+                        <i class="fa fa-save"></i> Mostrar Título
+                    </button>
+                    <button class="btn btn-sm btn-primary" *ngIf="!descriptionEditMode"
+                        (click)="toggleDescriptionEditMode()">
+                        <i class="fa fa-edit"></i> Editar Descripción
+                    </button>
+                    <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode"
+                        (click)="toggleDescriptionEditMode()">
+                        <i class="fa fa-save"></i> Mostrar Descripción
+                    </button>
+                </div>
+            </div>
 
-            <!--   <div class="form-group row">
-                <label for="codsurveyErp" class="col-form-label col-sm-2">Codigo Erp <span style="color: red">(*)</span></label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="survey.codsurveyErp" (ngModelChange)="survey.codsurveyErp = toUpeCaseEvent($event)" name="codsurveyErp" #codsurveyErp="ngModel" required minlength="1">
-                    <div class="alert alert-danger" *ngIf="codsurveyErp.invalid && (codsurveyErp.dirty || codsurveyErp.touched)">
-                        <div *ngIf="!!codsurveyErp.errors.required">
-                            codsurveyErp es requerido
-                        </div>
-                        <div *ngIf="!!codsurveyErp.errors.minlength">
-                            codsurveyErp debe tener al menos 1 caracteres
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="descripcion" class="col-form-label col-sm-2">survey <span style="color: red">(*)</span></label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="survey.descripcion" name="descripcion" #descripcion="ngModel" (ngModelChange)="survey.descripcion =toUpeCaseEvent($event)" required minlength="5">
-                    <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
-                        <div *ngIf="!!descripcion.errors.required">
-                            descripcion es requerido
-                        </div>
-                        <div *ngIf="!!descripcion.errors.minlength">
-                            descripcion debe tener al menos 5 caracteres
-                        </div>
-                    </div>
-                </div>
-            </div>
- -->
+            <br>
+            <app-create-question (questionCreated)="handleQuestionCreated($event)"></app-create-question>
+            <br>
+
+         
 
             <div class="form-group row button-group">
                 <div class="col-sm-6">
-                    <button type="button" [routerLink]="['/encuestas']" class="btn btn-danger waves-effect waves-light"><i
-                            class="fa  fa-arrow-circle-left"></i> Atrás</button>
+                    <button type="button" [routerLink]="['/encuestas']"
+                        class="btn btn-danger waves-effect waves-light"><i class="fa  fa-arrow-circle-left"></i>
+                        Atrás</button>
                     <button class="btn btn-info waves-effect waves-light" type="button" role="button" (click)='create()'
                         *ngIf="!survey.codSurvey else elseBlock" [disabled]="!surveyForm.form.valid"><i
                             class="fa   fa-floppy-o"></i>Crear</button>
