@@ -1,31 +1,55 @@
 <div class="create-question">
     <form (ngSubmit)="onSubmit()">
-        
-        
-        
-        <label for="questionText">Texto de la Pregunta:</label>
-  
-            <div class="form-group">
-                <div class="input-group" *ngIf="!showQuestion">
-                    <button class="btn btn-secondary" type="button" (click)="showQuestionText()">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                    <input type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
-                        name="questionText" />
+
+        <section>
+            <div class="row">
+                <div class="col-9  ">
+                     
+                </div>
+                <div class="col-3  ">
+
+                    <textarea type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
+                        placeholder="Escriba la pregunta" name="questionText" rows="2">
+                </textarea>
+
+
+
+                    <select id="questionType" class="form-control" [(ngModel)]="question.questionType"
+                        name="questionType">
+                        <option value="INPUT">Respuesta corta, de texto</option>
+                        <option value="TEXTAREA">Respuesta larga , de texto</option>
+                        <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
+                        <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
+                    </select>
                 </div>
             </div>
- 
-            <div *ngIf="showQuestion" class="form-group">
-                <span (click)="clearQuestionText()"> <i class="fa fa-trash"></i></span>
-                <span> {{ question.questionText }}</span>
+        </section>
+
+
+
+        <label for="questionText">Texto de la Pregunta:</label>
+
+        <div class="form-group">
+            <div class="input-group" *ngIf="!showQuestion">
+                <button class="btn btn-secondary" type="button" (click)="showQuestionText()">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <input type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
+                    name="questionText" />
             </div>
-    
+        </div>
+
+        <div *ngIf="showQuestion" class="form-group">
+            <span (click)="clearQuestionText()"> <i class="fa fa-trash"></i></span>
+            <span> {{ question.questionText }}</span>
+        </div>
 
 
 
 
-        <div class="d-flex flex-row flex-wrap mt-2"  *ngIf="showQuestion" >
-           <!--  <div class="form-group me-3">
+
+        <div class="d-flex flex-row flex-wrap mt-2" *ngIf="showQuestion">
+            <!--  <div class="form-group me-3">
                 <label for="alignment">Alineación:</label>
                 <select id="alignment" class="form-control" [(ngModel)]="question.alignment" name="alignment">
                     <option value="left">Izquierda</option>
@@ -40,10 +64,10 @@
                     <option value="bold">Negrita</option>
                 </select>
             </div> -->
-            <div class="form-group"> 
+            <div class="form-group">
                 <button class="btn btn-secondary" type="button" (click)="showQuestionText()">
-                <i class="fa fa-plus"></i>
-            </button>
+                    <i class="fa fa-plus"></i>
+                </button>
                 <label for="questionType">Selecciona el tipo de respuesta, que necesitas para la pregunta:</label>
                 <select id="questionType" class="form-control" [(ngModel)]="question.questionType" name="questionType">
                     <option value="INPUT">Respuesta corta, de texto</option>
@@ -53,16 +77,16 @@
                 </select>
             </div>
         </div>
-        
 
 
 
 
 
-        <div class="form-group" *ngIf="showQuestion" >
+
+        <div class="form-group" *ngIf="showQuestion">
             <section class="mt-5">
 
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="questionType">Tipo de Pregunta:</label>
                     <select id="questionType" class="form-control" [(ngModel)]="question.questionType"
                         name="questionType">
