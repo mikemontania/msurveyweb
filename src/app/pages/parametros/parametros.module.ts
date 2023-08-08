@@ -5,12 +5,15 @@ import { ParametrosRoutingModule } from './parametros-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EncuestasComponent } from './encuestas/encuestas.component';
+import { EncuestaComponent } from './encuesta/encuesta.component';
+import { NgbPaginationModule, NgbAlertModule, NgbModule, NgbHighlight } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [
   
-    EncuestasComponent
+    EncuestasComponent,
+        EncuestaComponent
   ],
   exports: [
     EncuestasComponent
@@ -19,8 +22,13 @@ import { EncuestasComponent } from './encuestas/encuestas.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ParametrosRoutingModule,
     RouterModule,
-    ParametrosRoutingModule
+    NgOptionHighlightModule,
+    NgbPaginationModule,
+    NgbModule,
+
+
   ]
 })
 export class ParametrosModule { }

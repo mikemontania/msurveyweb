@@ -1,10 +1,18 @@
 import { Question } from "./question.models";
 
 export class Survey {
-    constructor(
-      public id: number,
-      public title: string,
-      public description: string,
-      public questions: Question[]
-    ) {}
-  }
+  codSurvey?: number;
+  title: string;
+  description?: string;
+  img?: string;
+  active?: boolean;
+  creationDate?: Date;
+  codUser: number;
+  questions: Question[];
+  createdAt?: Date;
+  createdBy?: string;
+  updatedAt?: Date;
+  updatedBy?: string;
+  constructor(
+  ) { }
+}

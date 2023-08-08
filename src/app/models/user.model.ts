@@ -1,26 +1,34 @@
 export class User {
-    id: number;
-    username: string | null;
-    name: string | null;
-    password: string | null;
-    role: string | null;
-    admin: string | null;
-    attempts: number | null;
-    active: boolean | null;
-    blocked: boolean | null;
+  codUser?: number;
+  username?: string;
+  name?: string;
+  password?: string;
+  img?: string;
+  role?: string;
+  attempts?: number;
+  active?: boolean;
+  blocked?: boolean;
+  createdAt?: Date;
+  createdBy?: string;
+  updatedAt?: Date;
+  updatedBy?: string;
   
     constructor(
-      id: number,
-      username: string | null,
-      name: string | null,
-      password: string | null,
-      role: string | null,
-      admin: string | null,
-      attempts: number | null,
-      active: boolean | null,
-      blocked: boolean | null
+      codUser?: number,
+      username?: string,
+      name?: string,
+      password?: string,
+      img?: string,
+      role?: string,
+      attempts?: number,
+      active?: boolean,
+      blocked?: boolean,
+      createdAt?: Date,
+      createdBy?: string,
+      updatedAt?: Date,
+      updatedBy?: string,
     ) {
-      this.id = id;
+    /*   this.id = id;
       this.username = username;
       this.name = name;
       this.password = password;
@@ -28,6 +36,6 @@ export class User {
       this.admin = admin;
       this.attempts = attempts;
       this.active = active;
-      this.blocked = blocked;
+      this.blocked = blocked; */
     }
   }
