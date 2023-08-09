@@ -4,8 +4,7 @@ export class Answer {
   answerType?: string;
   answerText?: string;
   codQuestion: number;
-  obligatory: boolean;
-  amount: number;
+  
   createdAt?: Date;
   createdBy?: string;
   updatedAt?: Date;

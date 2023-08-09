@@ -8,6 +8,8 @@ export class Question {
   questionType: string;
   alignment: string;
   bold: string;
+  obligatory: boolean;
+  amount: number;
   img?: string;
   codSurvey: number;
   answer?: Answer[];

@@ -21,13 +21,14 @@ question: Question = new Question();
     this.question.questionType ='INPUT';
     this.question.alignment ='left';
     this.question.alignment ='normal';
+    this.question.amount=3;
+    this.question.obligatory=false;
     this.answers.push({
       codAnswer: 1,
       answerType: '',
       answerText: '',
       codQuestion: null,
-      amount:0,
-      obligatory:false,
+
       createdAt: new Date(),
       createdBy: '',
       updatedAt: new Date(),
@@ -48,8 +49,7 @@ question: Question = new Question();
       answerType: '',
       answerText: '',
       codQuestion: null,
-      obligatory:false,
-      amount:0,
+ 
       createdAt: new Date(),
       createdBy: '',
       updatedAt: new Date(),
@@ -61,7 +61,9 @@ question: Question = new Question();
   showQuestionText() {
     this.showQuestion = true;
   }
-
+  createRange(count: number): number[] {
+    return Array.from({ length: count }, (_, i) => i);
+  }
   clearQuestionText() {
     this.showQuestion = false;
     this.question.questionText = '';
