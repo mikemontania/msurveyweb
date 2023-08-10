@@ -22,11 +22,13 @@ export class EncuestaComponent implements OnInit {
   survey: Survey = new Survey();
   question: Question = new Question();
   answer: Answer = new Answer();
-  user: User; 
-  questions: Question[]=[];
-  answers: Answer[]=[];
+  user: User;
+  questions: Question[] = [];
+  answers: Answer[] = [];
   titleEditMode = false;
   descriptionEditMode = false;
+  rangeValue: number = 1;
+  cantidad: number = 1;
   constructor(
     private _loginService: LoginService,
     private toastr: ToastrService,
@@ -35,33 +37,33 @@ export class EncuestaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder) {
 
-  this.survey.codSurvey=null;
-  this.survey.title= 'Titulo';
-  this.survey.description= 'Descripcion';
-  this.survey.img= '';
-  this.survey.active= true;
-  this.survey.creationDate =new Date();
-  this.survey.codUser = this._loginService.user.codUser;
-  this.survey.questions = []
+    this.survey.codSurvey = null;
+    this.survey.title = 'Titulo';
+    this.survey.description = 'Descripcion';
+    this.survey.img = '';
+    this.survey.active = true;
+    this.survey.creationDate = new Date();
+    this.survey.codUser = this._loginService.user.codUser;
+    this.survey.questions = []
 
 
-  this.question.codQuestion =null;
-  this.question.questionText='';
-  this.question.alignment='';
-  this.question.bold='';   
-  this.question.img='';
-  this.question.codSurvey=null;
-  this.question.answer = []; 
+    this.question.codQuestion = null;
+    this.question.questionText = '';
+    this.question.alignment = '';
+    this.question.bold = '';
+    this.question.img = '';
+    this.question.codSurvey = null;
+    this.question.answer = [];
 
-  this.answer.codAnswer = null;
-  this.answer.answerType= '';
-  this.answer.answerText= '';
-  this.answer.codQuestion = null;
-  this.surveyForm = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
-    questions: []
-  }); 
+    this.answer.codAnswer = null;
+    this.answer.answerType = '';
+    this.answer.answerText = '';
+    this.answer.codQuestion = null;
+    this.surveyForm = this.fb.group({
+      title: ['', Validators.required],
+      description: [''],
+      questions: []
+    });
   }
 
   ngOnInit() {
@@ -78,10 +80,16 @@ export class EncuestaComponent implements OnInit {
 
   handleQuestionCreated(question: any) {
     console.log('Pregunta creada en el componente padre:', question);
+    if (question) {
+       this.questions = [...this.questions, question];
+      console.log('array:', this.questions);
+    }
     // Aquí puedes realizar cualquier otra lógica con la pregunta creada
   }
 
 
+  onRangeValueChange(event) { console.log(event) }
+  onCantidadChange(event) { console.log(event) }
 
   create(): void {
     this._encuestasServices.createSurvey(this.survey)
@@ -89,7 +97,7 @@ export class EncuestaComponent implements OnInit {
         encuestas => {
           this.router.navigate(['/encuestas']);
           Swal.fire('Nuevo encuesta', `El encuesta ${this.survey.description} ha sido creado con éxito`, 'success');
-        } 
+        }
       );
   }
 
@@ -99,7 +107,7 @@ export class EncuestaComponent implements OnInit {
         json => {
           this.router.navigate(['/encuestas']);
           Swal.fire('encuesta Actualizado', `encuesta  : ${json.description}`, 'success');
-        } 
+        }
       );
   }
 
@@ -116,11 +124,7 @@ export class EncuestaComponent implements OnInit {
   }
 
 
-  addQuestion() {
-    const question = { ...this.newQuestion }; // Clonamos la pregunta
-    this.surveyForm.get('questions').value.push(question);
-    this.newQuestion = new Question();
-  }
+
 
   addAnswer(question: Question) {
     if (!question.answer) {

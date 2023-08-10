@@ -4,193 +4,128 @@
         <section>
             <div class="row">
                 <div class="col-3">
-                    <textarea type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
-                        placeholder="Escriba la pregunta" name="questionText" rows="2"></textarea>
 
-                    <select id="questionType" class="form-control" [(ngModel)]="question.questionType"
-                        name="questionType">
-                        <option value="INPUT">Respuesta corta, de texto</option>
-                        <option value="TEXTAREA">Respuesta larga, de texto</option>
-                        <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
-                        <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
-                        <option value="RANGE">Rango</option>
-                        <option value="STARS">Estrellas</option>
-                    </select>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="obligatory">Obligatorio</label>
-                        <input class="form-check-input" type="checkbox" id="obligatory"
-                            [(ngModel)]="question.obligatory" name="obligatory" required>
+                    <div class="row mb-3">
+                        <label for="questionText" class="col-sm-3 col-form-label">Pregunta</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" id="questionText" class="form-control"
+                                [(ngModel)]="question.questionText" placeholder="Escriba la pregunta"
+                                name="questionText" rows="2"></textarea>
+                        </div>
                     </div>
 
-                    <div class="card"*ngIf="question.questionType != 'INPUT' && question.questionType != 'TEXTAREA'">
-                        <div class="card-body" >
-                          <label for="amount" class="card-title form-label">Cantidad</label>
-                          <div class="mb-3">
-                            <div class="d-flex align-items-center">
-                              <input type="range" class="form-range flex-grow-1" id="amount" name="amount" min="1" max="10" [(ngModel)]="question.amount">
-                              <div class="text-center flex-shrink-1" style="width: 30px; height: 30px; border: 1px solid #ced4da; border-radius: 4px; margin-left: 10px;">{{ question.amount }}</div>
-                            </div>
-                          </div>
-                          <!-- Resto del formulario aquí -->
+                    <div class="row mb-3">
+                        <label for="questionType" class="col-sm-3 col-form-label">Tipo</label>
+                        <div class="col-sm-9">
+                            <select id="questionType" class="form-control" [(ngModel)]="question.questionType"
+                                name="questionType" (ngModelChange)="onQuestionTypeChange()">
+                                <option value="INPUT">Respuesta corta, de texto</option>
+                                <option value="TEXTAREA">Respuesta larga, de texto</option>
+                                <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
+                                <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
+                                <option value="RANGE">Rango</option>
+                                <option value="STARS">Estrellas</option>
+                            </select>
                         </div>
-                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label for="obligatory" class="col-sm-3 col-form-label">Requerido</label>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="obligatory"
+                                    [(ngModel)]="question.obligatory" name="obligatory" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3"
+                        *ngIf="question.questionType != 'INPUT' && question.questionType != 'TEXTAREA' && question.questionType != 'RANGE'">
+                        <label for="obligatory" class="col-sm-3 col-form-label">Items</label>
+                        <div class="col-sm-9">
+                            <app-loand-term-slider [initialValue]="question.amount" [minValue]="1" [maxValue]="10"
+                                [unitText]="'Item'" (initialValueChange)="onSliderValueChange($event)">
+                            </app-loand-term-slider>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" *ngIf=" question.questionType == 'RANGE'">
+                        <label for="amount" class="col-sm-3 col-form-label">Cantidad</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" id="amount" [(ngModel)]="question.amount"
+                                name="obligatory" min="1" max="10000000" required>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="col-9">
                     <div class="mb-3">
-                        <label for="inputPregunta1" class="form-label">{{question.questionText}}</label>
+                        <label for="inputPregunta1" *ngIf="question.questionText && question.questionText.length > 1"
+                            class="form-label">{{question.questionText}}</label>
+                        <label for="inputPregunta1" *ngIf="!question.questionText || question.questionText.length <= 1"
+                            class="form-label">¿ Cual es la pregunta ?</label>
+
+                    </div>
+                    <div class="mb-3">
+
+                        <!-- Respuesta corta, de texto -->
+
 
                         <input type="text" class="form-control" id="inputPregunta1" name="pregunta1"
-                            *ngIf="question.questionType == 'INPUT'" required>
+                            *ngIf="question.questionType == 'INPUT'" disabled="true">
+                        <!-- Respuesta larga, de texto -->
 
                         <textarea class="form-control" id="textareaPregunta1" name="pregunta1" rows="2"
-                            *ngIf="question.questionType == 'TEXTAREA'" required></textarea>
+                            *ngIf="question.questionType == 'TEXTAREA'" disabled="true"></textarea>
 
 
-
-                        <input type="range" class="form-range" id="inputRango" name="pregunta1" min="1" max="10"
-                            required *ngIf="question.questionType == 'RANGE'">
+                        <!-- Rango -->
 
 
-                            <div class="form-check" *ngIf="question.questionType == 'CHECKBOX'">
-                                <ng-container *ngFor="let option of createRange(question.amount); let i = index">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" [id]="'checkbox' + i" [name]="'pregunta3_opcion' + (i+1)">
-                                    <label class="form-check-label" [for]="'checkbox' + i">{{ 'Opción ' + (i + 1) }}</label>
-                                  </div>
-                                </ng-container>
-                              </div>
-                              
-                              <div class="form-check" *ngIf="question.questionType == 'RADIOBUTTON'">
-                                <ng-container *ngFor="let option of createRange(question.amount); let i = index">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" [name]="'pregunta1'" [id]="'radio' + i" [value]="'opcion' + (i + 1)">
-                                    <label class="form-check-label" [for]="'radio' + i">{{ 'Opción ' + (i + 1) }}</label>
-                                  </div>
-                                </ng-container>
-                              </div>
-                              
-                              <div class="rating" *ngIf="question.questionType == 'STARS'">
-                                <ng-container *ngFor="let option of createRange(question.amount); let i = index">
-                                  <label [for]="'star' + i">
-                                    <input type="radio" [id]="'star' + i" [name]="'pregunta6'" [value]="i+1">
-                                    <i class="fas fa-star"></i>
-                                  </label>
-                                </ng-container>
-                              </div>
-                              
+                        <app-loand-term-slider *ngIf="question.questionType == 'RANGE'" [initialValue]="rangeValue"
+                            [minValue]="1" [maxValue]="question.amount" [unitText]="'Item'"
+                            (initialValueChange)="rangeValue">
+                        </app-loand-term-slider>
+
+                        <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON'">
+                            <div *ngFor="let option of createRange(question.amount); let i = index">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                        type="{{ question.questionType == 'CHECKBOX' ? 'checkbox' : 'radio' }}"
+                                        [name]="question.questionType == 'CHECKBOX' ? 'pregunta3_opcion' + (i+1) : 'pregunta1'"
+                                        [id]="question.questionType == 'CHECKBOX' ? 'checkbox' + i : 'radio' + i"
+                                        [value]="'opcion' + (i + 1)">
+                                    <label class="form-check-label"
+                                        [for]="question.questionType == 'CHECKBOX' ? 'checkbox' + i : 'radio' + i">
+                                        {{ 'Opción ' + (i + 1) }}
+                                    </label>
+                                    <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
+                                        [placeholder]="'Descripción opción ' + (i + 1)" name="descripcion{{ i }}"
+                                        [ngModelOptions]="{ standalone: true }">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="cantidad"
+                            [totalStars]="question.amount"></app-custom-rating>
+
 
                     </div>
                 </div>
             </div>
         </section>
 
-
-
-        <label for="questionText">Texto de la Pregunta:</label>
-
-        <div class="form-group">
-            <div class="input-group" *ngIf="!showQuestion">
-                <button class="btn btn-secondary" type="button" (click)="showQuestionText()">
-                    <i class="fa fa-plus"></i>
-                </button>
-                <input type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
-                    name="questionText" />
-            </div>
-        </div>
-
-        <div *ngIf="showQuestion" class="form-group">
-            <span (click)="clearQuestionText()"> <i class="fa fa-trash"></i></span>
-            <span> {{ question.questionText }}</span>
-        </div>
-
-
-
-
-
-        <div class="d-flex flex-row flex-wrap mt-2" *ngIf="showQuestion">
-            <!--  <div class="form-group me-3">
-                <label for="alignment">Alineación:</label>
-                <select id="alignment" class="form-control" [(ngModel)]="question.alignment" name="alignment">
-                    <option value="left">Izquierda</option>
-                    <option value="center">Centro</option>
-                    <option value="right">Derecha</option>
-                </select>
-            </div>
-            <div class="form-group me-3">
-                <label for="bold">Negrita:</label>
-                <select id="bold" class="form-control" [(ngModel)]="question.bold" name="bold">
-                    <option value="normal">Normal</option>
-                    <option value="bold">Negrita</option>
-                </select>
-            </div> -->
-            <div class="form-group">
-                <button class="btn btn-secondary" type="button" (click)="showQuestionText()">
-                    <i class="fa fa-plus"></i>
-                </button>
-                <label for="questionType">Selecciona el tipo de respuesta, que necesitas para la pregunta:</label>
-                <select id="questionType" class="form-control" [(ngModel)]="question.questionType" name="questionType">
-                    <option value="INPUT">Respuesta corta, de texto</option>
-                    <option value="TEXTAREA">Respuesta larga , de texto</option>
-                    <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
-                    <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
-                </select>
-            </div>
-        </div>
-
-
-
-
-
-
-        <div class="form-group" *ngIf="showQuestion">
-            <section class="mt-5">
-
-                <div class="form-group">
-                    <label for="questionType">Tipo de Pregunta:</label>
-                    <select id="questionType" class="form-control" [(ngModel)]="question.questionType"
-                        name="questionType">
-                        <option value="INPUT">Respuesta corta</option>
-                        <option value="TEXTAREA">Respuesta larga</option>
-                        <option value="CHECKBOX">Selección Múltiple varias opciones</option>
-                        <option value="RADIOBUTTON">Selección Múltiple una opcion</option>
-                    </select>
-                    <div *ngIf="question.questionType === 'CHECKBOX' || question.questionType === 'RADIOBUTTON'">
-                        <button type="button" class="btn btn-secondary btn-sm" (click)="addAnswer()">
-                            Agregar más opciones<i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <section class="container mt-5">
-                    <input *ngIf="question.questionType === 'INPUT'" type="text" id="answerText" class="form-control"
-                        [(ngModel)]="answerText" name="answerText">
-
-                    <textarea *ngIf="question.questionType === 'TEXTAREA'" type="text" id="answerText"
-                        class="form-control" [(ngModel)]="answerText" name="answerText" rows="2">
-                </textarea>
-
-
-                    <div *ngIf="question.questionType === 'CHECKBOX' || question.questionType === 'RADIOBUTTON'">
-
-                        <div *ngFor="let answer of answers; let i = index" class="answer-group">
-                            <input type="text" class="form-control" [(ngModel)]="answer.answerText" name="answer{{i}}">
-                            <button type="button" class="btn btn-danger btn-sm"
-                                (click)="removeAnswer(i)">Eliminar</button>
-                        </div>
-                    </div>
-
-                </section>
-
-            </section>
-
-
-
-
-
-
-
-        </div>
         <button type="submit" class="btn btn-success mt-5"><i class="fa fa-plus"></i> Siguente Pregunta</button>
     </form>
 </div>

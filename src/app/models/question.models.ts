@@ -1,4 +1,5 @@
 import { Answer } from "./answer.model";
+import { SurveyResponse } from "./responseSurvey.model";
  
 export class Question {
 
@@ -12,6 +13,7 @@ export class Question {
   amount: number;
   img?: string;
   codSurvey: number;
+  response?: SurveyResponse;
   answer?: Answer[];
   createdAt?: Date;
   createdBy?: string;

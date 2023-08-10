@@ -4,7 +4,6 @@
         <h4 *ngIf="survey.codSurvey" class="m-b-0 text-white">Actualizar Encuesta</h4>
     </div>
     <div class="card-body mt-5">
-
         <form #surveyForm="ngForm">
             <div class="header">
                 <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
@@ -19,7 +18,7 @@
                         <ng-container *ngIf="!descriptionEditMode">{{ survey.description }}</ng-container>
                         <ng-container *ngIf="descriptionEditMode">
                             <textarea class="form-control" [(ngModel)]="survey.description"
-                                name="description"></textarea>
+                            name="description"></textarea>
                         </ng-container>
                     </p>
                     <button class="btn btn-sm btn-primary" *ngIf="!titleEditMode" (click)="toggleTitleEditMode()">
@@ -29,21 +28,30 @@
                         <i class="fa fa-save"></i> Mostrar Título
                     </button>
                     <button class="btn btn-sm btn-primary" *ngIf="!descriptionEditMode"
-                        (click)="toggleDescriptionEditMode()">
-                        <i class="fa fa-edit"></i> Editar Descripción
-                    </button>
-                    <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode"
-                        (click)="toggleDescriptionEditMode()">
-                        <i class="fa fa-save"></i> Mostrar Descripción
-                    </button>
-                </div>
-            </div>
+                    (click)="toggleDescriptionEditMode()">
+                    <i class="fa fa-edit"></i> Editar Descripción
+                </button>
+                <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode"
+                (click)="toggleDescriptionEditMode()">
+                <i class="fa fa-save"></i> Mostrar Descripción
+            </button>
+        </div>
+    </div>
+    
+    
+    <div class="container ">
 
-            <br>
+        <br>
+        <app-question-list [questions]="questions"  
+                    (rangeValueChange)="onRangeValueChange($event)"
+                    (cantidadChange)="onCantidadChange($event)"></app-question-list>
+                  
+                <br>
+    </div> 
             <app-create-question (questionCreated)="handleQuestionCreated($event)"></app-create-question>
             <br>
 
-         
+
 
             <div class="form-group row button-group">
                 <div class="col-sm-6">
