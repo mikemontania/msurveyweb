@@ -7,7 +7,7 @@ export class SurveyResponse {
     codUser: number;
     codSurvey: number;
     codQuestion: number;
-    codAnswer: number;
+    codChoice: number;
     response: any; // Cambia 'any' por el tipo adecuado para tus respuestas
     createdAt: Date;
     createdBy: string;

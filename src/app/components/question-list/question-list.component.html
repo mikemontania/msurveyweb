@@ -19,17 +19,17 @@
 
             <!-- Selección Múltiple, varias opciones -->
             <!-- Respuestas para preguntas -->
-            <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON'  && question.answer">
-                <div *ngFor="let ans of question.answer; let i = index">
+            <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON'  && question.Choices">
+                <div *ngFor="let ans of question.Choices; let i = index">
                     <div class="form-check">
                         <input class="form-check-input"
                             type="{{ question.questionType == 'CHECKBOX' ? 'checkbox' : 'radio' }}"
-                            [name]="question.questionType+ ans.answerText+i"
-                            [id]="question.questionType+ ans.answerText+i" [value]="'opcion' + (i + 1)"
+                            [name]="question.questionType+ ans.choiceText+i"
+                            [id]="question.questionType+ ans.choiceText+i" [value]="'opcion' + (i + 1)"
                             [(ngModel)]="question.response.response">
                         <label class="form-check-label"
                             [for]="question.questionType == 'CHECKBOX' ? 'checkbox' + question.codQuestion + i : 'radio' + question.codQuestion + i">
-                            {{   (i + 1) +'.- '  }}{{ ans.answerText }}
+                            {{   (i + 1) +'.- '  }}{{ ans.choiceText }}
                         </label>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
 
 
             <!-- Estrellas -->
-            <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="cantidad"
+            <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
                 [totalStars]="question.amount"></app-custom-rating>
         </div>
     </div>

@@ -1,6 +1,6 @@
-import { Answer } from "./answer.model";
+import { Choice } from "./choice.model";
 import { SurveyResponse } from "./responseSurvey.model";
- 
+
 export class Question {
 
 
@@ -14,16 +14,15 @@ export class Question {
   img?: string;
   codSurvey: number;
   response?: SurveyResponse;
-  answer?: Answer[];
+  Choices?: Choice[];
   createdAt?: Date;
   createdBy?: string;
   updatedAt?: Date;
   updatedBy?: string;
-   
+
 
 
     constructor(
-    
+
     ) {}
   }
-  

@@ -8,7 +8,7 @@ export class Survey {
   active?: boolean;
   creationDate?: Date;
   codUser: number;
-  questions: Question[];
+  Questions: Question[];
   createdAt?: Date;
   createdBy?: string;
   updatedAt?: Date;

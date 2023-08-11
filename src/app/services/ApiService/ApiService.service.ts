@@ -11,10 +11,10 @@ import { Survey } from 'src/app/models/survey.model';
 })
 export class ApiService {
 
- 
+
   constructor(private http: HttpClient) { }
 
-  
+
   getUserProfileImage(id: string): Observable<any> {
     return this.http.get(`${BASE_URL}uploads/usuarios/${id}`).pipe(
       map((resp: any) => resp),
@@ -26,9 +26,9 @@ export class ApiService {
     );
   }
 
-  getSurveyById(surveyId: number): Observable<Survey> {
-    const url = `${BASE_URL}/surveys/${surveyId}`;
-    return this.http.get<Survey>(url).pipe(
+  getSurveyById(surveyId: number): Observable<any> {
+    const url = `${BASE_URL}survey/${surveyId}`;
+    return this.http.get<any>(url).pipe(
       map((resp: any) => resp),
       catchError(e => {
         console.error('ERROR', e.error);
@@ -52,7 +52,7 @@ export class ApiService {
   }
 
   createSurvey(surveyData: Survey): Observable<Survey> {
-    return this.http.post(`${BASE_URL}survey`, surveyData).pipe(
+    return this.http.post(`${BASE_URL}survey/create`, surveyData).pipe(
       map((resp: any) => resp),
       catchError(e => {
         console.error('ERROR', e.error);

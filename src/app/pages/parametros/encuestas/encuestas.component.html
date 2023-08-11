@@ -25,7 +25,7 @@
         <div *ngIf="surveys?.length == 0" class="alert alert-info">
             No se han encontrado registros...
         </div>
-        <div class="table-responsive" *ngIf="surveys?.length > 0">
+        <div class="table-responsive" *ngIf="surveys && surveys.length > 0">
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -36,10 +36,8 @@
                         <th>creationDate</th>
                         <th>codUser</th>
                         <th>createdAt</th>
-                        <th>updatedAt</th>
-                        <th>createdBy</th>
-                        <th>updatedBy</th>
-                        <th>Editar</th>
+                        <th>updatedAt</th> 
+                         <th>Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,17 +46,17 @@
                         <td>{{ survey.title }}</td>
                         <td>{{ survey.description }}</td>
                         <td>{{ survey.active ? 'SI' : 'NO' }}</td>
-                        <td>{{ survey.creationDate }}</td>
+                        <td>{{ survey.creationDate | date:'dd/MM/yyyy'}}</td>
                         <td>{{ survey.codUser }}</td>
-                        <td>{{ survey.createdAt }}</td>
-                        <td>{{ survey.updatedAt }}</td>
-                        <td>{{ survey.updatedBy }}</td>
-                        <td>
+                        <td>{{ survey.createdAt | date:'dd/MM/yyyy, h:mm a' }}</td>
+                        <td>{{ survey.updatedAt | date:'dd/MM/yyyy, h:mm a'}}</td>
+                         <td>
                             <button class="btn btn-info btn-circle" [routerLink]="['/parametros/encuesta', survey.codSurvey]" type="button">
                                 <i class="fa fa-pencil"></i>
                             </button>
                         </td>
                     </tr>
+                   
                 </tbody>
             </table>
         </div>

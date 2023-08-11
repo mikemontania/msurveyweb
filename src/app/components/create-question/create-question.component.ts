@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Answer } from 'src/app/models/answer.model';
+import { Choice } from 'src/app/models/choice.model';
 import { Question } from 'src/app/models/question.models';
 import { SurveyResponse } from 'src/app/models/responseSurvey.model';
 
@@ -14,9 +14,9 @@ export class CreateQuestionComponent {
   loanTerm: number = 10;
   unitText: string = 'opciones';
   rangeValue: number = 1;
-  cantidad: number = 1;
-  answerText: string = '';
-  answers: Answer[] = [];
+  quantity: number = 1;
+  choiceText: string = '';
+  choices: Choice[] = [];
   optionDescriptions: string[] = [];
 
   question: Question = new Question();
@@ -30,7 +30,7 @@ export class CreateQuestionComponent {
     this.question.amount = 3;
     this.question.response = new SurveyResponse();
     this.question.obligatory = false;
-    this.answers = [];
+    this.choices = [];
   }
   // Método para manejar el envío del formulario
 
@@ -38,10 +38,10 @@ export class CreateQuestionComponent {
     const newQuestion = { ...this.question }; // Crear una nueva instancia de Question
 
     if (newQuestion.questionType == 'CHECKBOX' || newQuestion.questionType == 'RADIOBUTTON') {
-      newQuestion.answer = this.optionDescriptions.map((description, i) => ({
-        codAnswer: null,
-        answerType: newQuestion.questionType,
-        answerText: description,
+      newQuestion.Choices = this.optionDescriptions.map((description, i) => ({
+        codChoice: null,
+        choiceType: newQuestion.questionType,
+        choiceText: description,
         codQuestion: null,
         createdAt: new Date(),
         createdBy: '',
@@ -49,10 +49,10 @@ export class CreateQuestionComponent {
         updatedBy: ''
       }));
     } else {
-      newQuestion.answer = [{
-        codAnswer: null,
-        answerType: newQuestion.questionType,
-        answerText: '',
+      newQuestion.Choices = [{
+        codChoice: null,
+        choiceType: newQuestion.questionType,
+        choiceText: '',
         codQuestion: null,
         createdAt: new Date(),
         createdBy: '',
@@ -65,11 +65,11 @@ export class CreateQuestionComponent {
 
     this.questionCreated.emit(newQuestion);
   }
-  addAnswer() {
-    const newAnswer: Answer = {
-      codAnswer: this.answers.length + 1,
-      answerType: '',
-      answerText: '',
+  addChoice() {
+    const newChoice: Choice = {
+      codChoice: this.choices.length + 1,
+      choiceType: '',
+      choiceText: '',
       codQuestion: null,
       createdAt: new Date(),
       createdBy: '',
@@ -77,14 +77,14 @@ export class CreateQuestionComponent {
       updatedBy: ''
     };
 
-    this.answers.push(newAnswer);
+    this.choices.push(newChoice);
   }
   showQuestionText() {
     this.showQuestion = true;
   }
   onQuestionTypeChange() {
     this.question.amount = 3;
-    this.cantidad = 1;
+    this.quantity = 1;
     this.rangeValue = 1;
   }
   createRange(count: number): number[] {
@@ -94,8 +94,8 @@ export class CreateQuestionComponent {
     this.showQuestion = false;
     this.question.questionText = '';
   }
-  removeAnswer(index: number) {
-    this.answers.splice(index, 1);
+  removeChoice(index: number) {
+    this.choices.splice(index, 1);
   }
   onSliderValueChange(newValue: number): void {
     this.question.amount = newValue;

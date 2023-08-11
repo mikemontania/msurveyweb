@@ -18,21 +18,25 @@ export class EncuestasComponent {
   paginas = [];
   busqueda: string = ''; 
   currentPage: number;
-  pageSize: number;
+  pageSize: number = 10; // Puedes ajustar el tamaño de página según tus necesidades
   constructor(private encuestaService: ApiService,
     private _loginService: LoginService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
-    public http: HttpClient) { }
+    public http: HttpClient) {
+      this.currentPage = 1;
+      this.pageSize = 10;
+     }
 
   ngOnInit() {
-    this.cargarEncuestas();
+    this.loadSurveys();
   }
 
-  cargarEncuestas(): void {
+  loadSurveys(): void {
     this.encuestaService.getSurveys()
-      .subscribe((surveys: Survey[]) => {
-        this.surveys = surveys;
+      .subscribe((content: any) => {
+        this.surveys = content.surveys;
+        console.log(this.surveys)
       });
   }
 

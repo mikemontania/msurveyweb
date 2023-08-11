@@ -1,8 +1,8 @@
-export class Answer {
+export class Choice {
 
-  codAnswer?: number;
-  answerType?: string;
-  answerText?: string;
+  codChoice?: number;
+  choiceType?: string;
+  choiceText?: string;
   codQuestion: number;
   
   createdAt?: Date;

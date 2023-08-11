@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Answer } from 'src/app/models/answer.model';
+import { Choice } from 'src/app/models/choice.model';
 import { Question } from 'src/app/models/question.models';
 import { Survey } from 'src/app/models/survey.model';
 import { User } from 'src/app/models/user.model';
@@ -21,18 +21,18 @@ export class EncuestaComponent implements OnInit {
   questionTypes = ['checkbox', 'radiobutton', 'input', 'textarea'];
   survey: Survey = new Survey();
   question: Question = new Question();
-  answer: Answer = new Answer();
+  choice: Choice = new Choice();
   user: User;
   questions: Question[] = [];
-  answers: Answer[] = [];
+  choices: Choice[] = [];
   titleEditMode = false;
   descriptionEditMode = false;
   rangeValue: number = 1;
-  cantidad: number = 1;
+  quantity: number = 1;
   constructor(
     private _loginService: LoginService,
     private toastr: ToastrService,
-    private _encuestasServices: ApiService,
+    private _surveyServices: ApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder) {
@@ -44,7 +44,7 @@ export class EncuestaComponent implements OnInit {
     this.survey.active = true;
     this.survey.creationDate = new Date();
     this.survey.codUser = this._loginService.user.codUser;
-    this.survey.questions = []
+    this.survey.Questions = []
 
 
     this.question.codQuestion = null;
@@ -53,12 +53,12 @@ export class EncuestaComponent implements OnInit {
     this.question.bold = '';
     this.question.img = '';
     this.question.codSurvey = null;
-    this.question.answer = [];
+    this.question.Choices = [];
 
-    this.answer.codAnswer = null;
-    this.answer.answerType = '';
-    this.answer.answerText = '';
-    this.answer.codQuestion = null;
+    this.choice.codChoice = null;
+    this.choice.choiceType = '';
+    this.choice.choiceText = '';
+    this.choice.codQuestion = null;
     this.surveyForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -71,8 +71,10 @@ export class EncuestaComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       if (id) {
-        this._encuestasServices.getSurveyById(id).subscribe((s) => {
-          this.survey = s;
+        this._surveyServices.getSurveyById(id).subscribe((s) => {
+          console.log(s.survey)
+          this.survey = { ...s.survey };
+          this.questions = [...s.survey.Questions];
         });
       }
     });
@@ -81,7 +83,7 @@ export class EncuestaComponent implements OnInit {
   handleQuestionCreated(question: any) {
     console.log('Pregunta creada en el componente padre:', question);
     if (question) {
-       this.questions = [...this.questions, question];
+      this.questions = [...this.questions, question];
       console.log('array:', this.questions);
     }
     // Aquí puedes realizar cualquier otra lógica con la pregunta creada
@@ -89,23 +91,24 @@ export class EncuestaComponent implements OnInit {
 
 
   onRangeValueChange(event) { console.log(event) }
-  onCantidadChange(event) { console.log(event) }
+  onQuantityChange(event) { console.log(event) }
 
   create(): void {
-    this._encuestasServices.createSurvey(this.survey)
+    this.survey.Questions = this.questions;
+    this._surveyServices.createSurvey(this.survey)
       .subscribe(
-        encuestas => {
-          this.router.navigate(['/encuestas']);
+        surveys => {
+          this.router.navigate(['/parametros/encuestas']);
           Swal.fire('Nuevo encuesta', `El encuesta ${this.survey.description} ha sido creado con éxito`, 'success');
         }
       );
   }
 
   update(): void {
-    this._encuestasServices.updateSurvey(this.survey)
+    this._surveyServices.updateSurvey(this.survey)
       .subscribe(
         json => {
-          this.router.navigate(['/encuestas']);
+          this.router.navigate(['/parametros/encuestas']);
           Swal.fire('encuesta Actualizado', `encuesta  : ${json.description}`, 'success');
         }
       );
@@ -126,16 +129,16 @@ export class EncuestaComponent implements OnInit {
 
 
 
-  addAnswer(question: Question) {
-    if (!question.answer) {
-      question.answer = [];
+  addChoice(question: Question) {
+    if (!question.Choices) {
+      question.Choices = [];
     }
-    question.answer.push(new Answer());
+    question.Choices.push(new Choice());
   }
 
-  removeAnswer(question: Question, index: number) {
-    if (question.answer) {
-      question.answer.splice(index, 1);
+  removeChoice(question: Question, index: number) {
+    if (question.Choices) {
+      question.Choices.splice(index, 1);
     }
   }
 
