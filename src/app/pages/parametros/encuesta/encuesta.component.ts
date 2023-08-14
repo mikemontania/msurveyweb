@@ -18,8 +18,7 @@ import Swal from 'sweetalert2';
 export class EncuestaComponent implements OnInit {
   surveyForm: FormGroup;
   newQuestion: Question = new Question();
-  questionTypes = ['checkbox', 'radiobutton', 'input', 'textarea'];
-  survey: Survey = new Survey();
+   survey: Survey = new Survey();
   question: Question = new Question();
   choice: Choice = new Choice();
   user: User;
