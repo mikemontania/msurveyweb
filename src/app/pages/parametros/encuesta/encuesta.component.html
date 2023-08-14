@@ -1,70 +1,67 @@
 <div class="card ">
-    <div class="card-header  bg-dark text-white">
-        <h4 *ngIf="!survey.codSurvey" class="m-b-0 text-white">Crear Encuesta</h4>
-        <h4 *ngIf="survey.codSurvey" class="m-b-0 text-white">Actualizar Encuesta</h4>
-    </div>
-    <div class="card-body mt-5">
-        <form #surveyForm="ngForm">
-            <div class="header">
-                <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
-                <div class="text-center">
-                    <h1>
-                        <ng-container *ngIf="!titleEditMode">{{ survey.title }}</ng-container>
-                        <ng-container *ngIf="titleEditMode">
-                            <input type="text" class="form-control" [(ngModel)]="survey.title" name=" title">
-                        </ng-container>
-                    </h1>
-                    <p>
-                        <ng-container *ngIf="!descriptionEditMode">{{ survey.description }}</ng-container>
-                        <ng-container *ngIf="descriptionEditMode">
-                            <textarea class="form-control" [(ngModel)]="survey.description"
-                                name="description"></textarea>
-                        </ng-container>
-                    </p>
-                    <button class="btn btn-sm btn-primary" *ngIf="!titleEditMode" (click)="toggleTitleEditMode()">
-                        <i class="fa fa-edit"></i> Editar Título
-                    </button>
-                    <button class="btn btn-sm btn-primary" *ngIf="titleEditMode" (click)="toggleTitleEditMode()">
-                        <i class="fa fa-save"></i> Vista previa Título
-                    </button>
-                    <button class="btn btn-sm btn-primary" *ngIf="!descriptionEditMode"
-                        (click)="toggleDescriptionEditMode()">
-                        <i class="fa fa-edit"></i> Editar Descripción
-                    </button>
-                    <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode"
-                        (click)="toggleDescriptionEditMode()">
-                        <i class="fa fa-save"></i> Vista previa Descripción
-                    </button>
-                </div>
-            </div>
+  <div class="card-header  bg-dark text-white">
+    <h4 *ngIf="!survey.codSurvey" class="m-b-0 text-white">Crear Encuesta</h4>
+    <h4 *ngIf="survey.codSurvey" class="m-b-0 text-white">Actualizar Encuesta</h4>
+  </div>
+  <div class="card-body mt-5">
+    <form #surveyForm="ngForm">
+      <div class="header">
+        <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
+        <div class="text-center">
+          <h1>
+            <ng-container *ngIf="!titleEditMode">{{ survey.title }}</ng-container>
+            <ng-container *ngIf="titleEditMode">
+              <input type="text" class="form-control" [(ngModel)]="survey.title" name=" title">
+            </ng-container>
+          </h1>
+          <p>
+            <ng-container *ngIf="!descriptionEditMode">{{ survey.description }}</ng-container>
+            <ng-container *ngIf="descriptionEditMode">
+              <textarea class="form-control" [(ngModel)]="survey.description" name="description"></textarea>
+            </ng-container>
+          </p>
+          <button class="btn btn-sm btn-primary" *ngIf="!titleEditMode" (click)="toggleTitleEditMode()">
+            <i class="fa fa-edit"></i> Editar Título
+          </button>
+          <button class="btn btn-sm btn-primary" *ngIf="titleEditMode" (click)="toggleTitleEditMode()">
+            <i class="fa fa-save"></i> Vista previa Título
+          </button>
+          <button class="btn btn-sm btn-primary" *ngIf="!descriptionEditMode" (click)="toggleDescriptionEditMode()">
+            <i class="fa fa-edit"></i> Editar Descripción
+          </button>
+          <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode" (click)="toggleDescriptionEditMode()">
+            <i class="fa fa-save"></i> Vista previa Descripción
+          </button>
+        </div>
+      </div>
 
-            <div class="container ">
-                <br>
-                <app-question-list [questions]="questions" (rangeValueChange)="onRangeValueChange($event)"
-                    (quantityChange)="onQuantityChange($event)"></app-question-list>
+      <div class="container ">
+        <br>
+        <app-question-list [questions]="questions" (rangeValueChange)="onRangeValueChange($event)"
+          (quantityChange)="onQuantityChange($event)"   ></app-question-list>
 
-                <br>
-            </div>
-            <app-create-question (questionCreated)="handleQuestionCreated($event)"></app-create-question>
-            <br>
+        <br>
+      </div>
+      <app-create-question (questionCreated)="handleQuestionCreated($event)"></app-create-question>
+      <br>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button class="btn btn-success" type="button" role="button" (click)='create()'
-                    *ngIf="!survey.codSurvey else elseBlock" [disabled]="!surveyForm.form.valid">
-                    <i class="fa fa-floppy-o"></i> Crear
-                </button>
-                <ng-template #elseBlock>
-                    <button class="btn btn-success" type="button" role="button" (click)='update()'
-                        [disabled]="!surveyForm.form.valid">
-                        <i class="fa fa-floppy-o"></i> Actualizar
-                    </button>
-                </ng-template>
-                <button type="button" [routerLink]="['/parametros/encuestas']" class="btn btn-danger">
-                    <i class="fa fa-arrow-circle-left"></i> Atrás
-                </button>
-            </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button class="btn btn-success" type="button" role="button" (click)='create()'
+          *ngIf="!survey.codSurvey else elseBlock" [disabled]="!surveyForm.form.valid">
+          <i class="fa fa-floppy-o"></i> Crear
+        </button>
+        <ng-template #elseBlock>
+          <button class="btn btn-success" type="button" role="button" (click)='update()'
+            [disabled]="!surveyForm.form.valid">
+            <i class="fa fa-floppy-o"></i> Actualizar
+          </button>
+        </ng-template>
+        <button type="button" [routerLink]="['/parametros/encuestas']" class="btn btn-danger">
+          <i class="fa fa-arrow-circle-left"></i> Atrás
+        </button>
+      </div>
 
 
-        </form>
-    </div>
+    </form>
+  </div>
 </div>

@@ -27,7 +27,7 @@ export class CreateQuestionComponent {
     this.question.questionType = 'INPUT';
     this.question.alignment = 'left';
     this.question.alignment = 'normal';
-    this.question.amount = 3;
+    this.question.amount = 1;
     this.question.response = new SurveyResponse();
     this.question.obligatory = false;
     this.choices = [];
@@ -60,12 +60,20 @@ export class CreateQuestionComponent {
         updatedBy: ''
       }];
     }
-
     // Resto de la lógica para guardar la pregunta
 
     this.questionCreated.emit(newQuestion);
+
+    this.question.questionText = '';
+    this.question.questionType = 'INPUT';
+    this.question.alignment = 'left';
+    this.question.alignment = 'normal';
+    this.question.amount = 1;
+    this.question.response = new SurveyResponse();
+    this.question.obligatory = false;
+    this.choices = [];
   }
-  addChoice() {
+  /* addChoice() {
     const newChoice: Choice = {
       codChoice: this.choices.length + 1,
       choiceType: '',
@@ -78,12 +86,12 @@ export class CreateQuestionComponent {
     };
 
     this.choices.push(newChoice);
-  }
+  } */
   showQuestionText() {
     this.showQuestion = true;
   }
   onQuestionTypeChange() {
-    this.question.amount = 3;
+    this.question.amount = 1;
     this.quantity = 1;
     this.rangeValue = 1;
   }

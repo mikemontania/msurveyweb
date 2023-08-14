@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Question } from 'src/app/models/question.models';
 import { SurveyResponse } from 'src/app/models/responseSurvey.model';
 
@@ -9,6 +9,7 @@ import { SurveyResponse } from 'src/app/models/responseSurvey.model';
 })
 export class QuestionListComponent implements OnInit, OnChanges {
   @Input() questions: Question[];
+  @Output() questionsChange: EventEmitter<Question[]> = new EventEmitter<Question[]>();
   responses: SurveyResponse[] = []; // Almacena las respuestas aquí
   optionDescriptions: string[] = [];
   rangeValue: number = 0; // Agregar esta propiedad para el rango
@@ -57,6 +58,12 @@ export class QuestionListComponent implements OnInit, OnChanges {
     console.log(this.questions);
   }
 
+  removeQuestion(index: number): void {
+    if (index >= 0 && index < this.questions.length) {
+      this.questions.splice(index, 1);
+      this.questionsChange.emit(this.questions);
+    }
+  }
   createRange(length: number): number[] {
     return Array.from({ length }, (_, i) => i);
   }

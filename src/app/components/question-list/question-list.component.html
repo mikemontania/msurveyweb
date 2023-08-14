@@ -2,6 +2,8 @@
   <div class="col-9">
     <div class="mb-3">
       <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}</label>
+      <button class="btn btn-link btn-sm ml-2 text-danger" (click)="removeQuestion(i)">        <i class="fas fa-trash-alt"></i>
+      </button>
     </div>
     <div class="mb-3">
       <!-- Respuesta corta, de texto -->
@@ -31,11 +33,9 @@
           </div>
         </div>
       </div>
-
-
       <!-- Estrellas -->
       <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
         [totalStars]="question.amount"></app-custom-rating>
+      </div>
     </div>
   </div>
-</div>
