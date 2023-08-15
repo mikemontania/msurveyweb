@@ -1,9 +1,8 @@
 <div class="create-question border border-2">
   <form (ngSubmit)="onSubmit()">
     <div class="row">
-      <div class="col-4">
-        <section class="section-container border border-2">
-          <h3 class="section-title">Configuración de Pregunta</h3>
+      <div class="col-md-12 col-lg-4">
+           <h3 class="section-title">Configuración de Pregunta</h3>
           <div class="row">
             <div class="row mb-3">
               <label for="questionText" class="col-sm-3 col-form-label">Pregunta</label>
@@ -58,11 +57,10 @@
               </div>
             </div>
           </div>
-        </section>
-      </div>
-      <div class="col-8">
-        <section class="section-container border border-2">
-          <h3 class="section-title">Vista Previa</h3>
+          <button type="submit" class="btn btn-success mt-5"><i class="fa fa-plus"></i> Siguiente Pregunta</button>
+        </div>
+      <div class="col-md-12 col-lg-8">
+           <h3 class="section-title">Vista Previa</h3>
           <div class="row">
             <div class="mb-3">
               <label for="inputPregunta1" *ngIf="question.questionText && question.questionText.length > 1"
@@ -116,17 +114,7 @@
               
                 <app-map  *ngIf="  question.questionType == 'MAPA'"(locationSelected)="handleLocationSelected($event)"></app-map>
 
-
-              <!--    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
-              [caritas]="[
-                { name: 'Muy insatisfecho', image: 'assets/caritas/1.png' },
-                { name: 'Insatisfecho', image: 'assets/caritas/2.png' },
-                { name: 'No lo se', image: 'assets/caritas/3.png' },
-                { name: 'Satisfecho', image: 'assets/caritas/4.png' },
-                { name: 'Muy Satisfecho', image: 'assets/caritas/5.png' }
-              ]"
-              (caritaSelected)="handleCaritaSelected($event)"
-            ></app-carita-button> -->
+ 
               <app-carita-button *ngIf="  question.questionType == 'CARITAS'" [caritas]="[
               { name: 'Muy insatisfecho', image: 'assets/caritas/muytriste.png' },
               { name: 'Insatisfecho', image: 'assets/caritas/triste.png' },
@@ -139,9 +127,10 @@
                 [totalStars]="question.amount"></app-custom-rating>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-success mt-5"><i class="fa fa-plus"></i> Siguente Pregunta</button>
+    
   </form>
 </div>
+
+ 

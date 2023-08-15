@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./encuesta.component.css']
 })
 export class EncuestaComponent implements OnInit {
+  selectedImage: File;
   surveyForm: FormGroup;
   newQuestion: Question = new Question();
   survey: Survey = new Survey();
@@ -88,7 +89,9 @@ export class EncuestaComponent implements OnInit {
     // Aquí puedes realizar cualquier otra lógica con la pregunta creada
   }
 
-
+  onImageChange(event: any) {
+    this.selectedImage = event.target.files[0];
+  }
   onRangeValueChange(event) { console.log(event) }
   onQuantityChange(event) { console.log(event) }
 

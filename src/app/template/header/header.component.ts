@@ -10,13 +10,7 @@ export class HeaderComponent {
   constructor(
     private loginService: LoginService
   ) { }
-  @Output() menuToggled = new EventEmitter<boolean>();
-  menuStatus: boolean = true;
-
-  MenuToggled() {
-    this.menuStatus = !this.menuStatus;
-    this.menuToggled.emit(this.menuStatus);
-  }
+ 
 
 
   logout() {

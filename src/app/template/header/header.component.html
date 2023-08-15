@@ -31,11 +31,7 @@
   </div>
   <div class="navbar-collapse">
     <ul class="navbar-nav me-auto menu-button  text-light ">
-      <li class="nav-item">
-        <a class="nav-link nav-toggler" (click)="MenuToggled()" href="javascript:void(0)">
-          <i class="fa-solid fa-bars"></i>
-        </a>
-      </li>
+      
 
     </ul>
   <!--   <ul class="navbar-nav me-auto flex-row ml-md-auto d-none d-md-flex  text-light ">
@@ -93,9 +89,8 @@
         <img src="assets/images/users/1.jpg" alt="User Profile" class="rounded-circle user-img">
       </a>
       <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="adminDropdown" style="border: none; padding: 0;">
-        <li class="nav-item"><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
-        <li class="nav-item"><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
-        <li class="nav-item">
+        <li class="nav-item"><a class="dropdown-item"  routerLink="/parametros/encuestas" href="#"><i class="fas fa-user"></i> Encuestas</a></li>
+         <li class="nav-item">
           <hr class="dropdown-divider">
         </li>
         <li class="nav-item"><a class="dropdown-item" href="#" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</a></li>

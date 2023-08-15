@@ -5,7 +5,7 @@
   </div>
   <div class="card-body mt-5">
     <form #surveyForm="ngForm">
-      <div class="header">
+ <!--      <div class="header">
         <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
         <div class="text-center">
           <h1>
@@ -33,7 +33,28 @@
             <i class="fa fa-save"></i> Vista previa Descripción
           </button>
         </div>
+      </div> -->
+
+
+      <div class="container mt-4">
+        <h2>Datos de cabecera para encuesta </h2>
+        <form  >
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" class="form-control" [(ngModel)]="survey.title" name=" title" required >
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea class="form-control" [(ngModel)]="survey.description" name="description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="image" (change)="onImageChange($event)" required>
+          </div>
+         
+        </form>
       </div>
+
 
       <div class="container ">
         <br>

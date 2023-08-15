@@ -45,15 +45,4 @@ main {
 }
 
  
-
- 
-.display-area{
-    position: absolute;
-    width: calc(100% - 80px);
-    left: 80px;
-}
-.display-area-shrink{ 
-    width: calc(100% - 250px);
-    left: 250px;
-}
  
