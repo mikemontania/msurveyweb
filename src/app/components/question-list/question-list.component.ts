@@ -57,7 +57,7 @@ export class QuestionListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     console.log(this.questions);
   }
-
+  handleCaritaSelected(e){}
   removeQuestion(index: number): void {
     if (index >= 0 && index < this.questions.length) {
       this.questions.splice(index, 1);

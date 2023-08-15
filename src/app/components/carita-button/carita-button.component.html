@@ -1,0 +1,10 @@
+<div class="caritas-container">
+  <div *ngFor="let carita of caritas">
+    <div class="carita-img">
+    <img class="carita-button" [class.selected]="carita.name === selectedCarita" [src]="carita.image" [alt]="carita.name"
+      (click)="toggleSelection(carita.name)"/>
+  
+  </div>
+    <p class="carita-name">{{ carita.name }}</p>
+  </div>
+</div>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Choice } from 'src/app/models/choice.model';
 import { Question } from 'src/app/models/question.models';
 import { SurveyResponse } from 'src/app/models/responseSurvey.model';
-
 @Component({
   selector: 'app-create-question',
   templateUrl: './create-question.component.html',
@@ -18,7 +17,7 @@ export class CreateQuestionComponent {
   choiceText: string = '';
   choices: Choice[] = [];
   optionDescriptions: string[] = [];
-
+  selectedCarita = '';
   question: Question = new Question();
   // Evento de salida para la pregunta creada
   @Output() questionCreated = new EventEmitter<any>();
@@ -34,6 +33,10 @@ export class CreateQuestionComponent {
   }
   // Método para manejar el envío del formulario
 
+
+  handleCaritaSelected(caritaName: string) {
+    //this.selectedCarita = caritaName;
+  }
   async onSubmit() {
     const newQuestion = { ...this.question }; // Crear una nueva instancia de Question
 

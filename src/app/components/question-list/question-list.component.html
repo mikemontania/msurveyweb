@@ -19,6 +19,18 @@
         [minValue]="1" [maxValue]="question.amount" [unitText]="'Item'" (initialValueChange)="responses[i].response">
       </app-loand-term-slider>
 
+ <!-- caritas -->
+      <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
+      [caritas]="[
+        { name: 'Muy insatisfecho', image: 'assets/caritas/1.png' },
+        { name: 'Insatisfecho', image: 'assets/caritas/2.png' },
+        { name: 'No lo se', image: 'assets/caritas/3.png' },
+        { name: 'Satisfecho', image: 'assets/caritas/4.png' },
+        { name: 'Muy Satisfecho', image: 'assets/caritas/5.png' }
+      ]"
+      (caritaSelected)="handleCaritaSelected($event)"
+    ></app-carita-button>
+
       <!-- Selección Múltiple, varias opciones -->
       <!-- Respuestas para preguntas -->
       <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON' && question.Choices">

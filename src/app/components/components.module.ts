@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { LoandTermSliderComponent } from './loand-term-slider/loand-term-slider.component';
 import { AppCustomRatingComponent } from './app-custom-rating/app-custom-rating.component';
 import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
-import { QuestionListComponent } from './question-list/question-list.component'; 
+import { QuestionListComponent } from './question-list/question-list.component';
+import { CaritaButtonComponent } from './carita-button/carita-button.component'; 
 
 
 
@@ -14,7 +15,8 @@ import { QuestionListComponent } from './question-list/question-list.component';
     CreateQuestionComponent,
     LoandTermSliderComponent,
     AppCustomRatingComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    CaritaButtonComponent
   ],
   exports: [
     CreateQuestionComponent,
