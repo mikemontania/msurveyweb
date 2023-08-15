@@ -1,7 +1,8 @@
 <div *ngFor="let question of questions; let i = index">
   <div class="col-9">
     <div class="mb-3">
-      <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}</label>
+      <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}<span
+        style="color:red;" *ngIf="question.obligatory">(*)</span></label>
       <button class="btn btn-link btn-sm ml-2 text-danger" (click)="removeQuestion(i)">        <i class="fas fa-trash-alt"></i>
       </button>
     </div>
