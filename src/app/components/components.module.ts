@@ -6,7 +6,8 @@ import { LoandTermSliderComponent } from './loand-term-slider/loand-term-slider.
 import { AppCustomRatingComponent } from './app-custom-rating/app-custom-rating.component';
 import { NgbRating} from '@ng-bootstrap/ng-bootstrap';
 import { QuestionListComponent } from './question-list/question-list.component';
-import { CaritaButtonComponent } from './carita-button/carita-button.component'; 
+import { CaritaButtonComponent } from './carita-button/carita-button.component';
+import { MapComponent } from './mapa/mapa.component';
 
 
 
@@ -16,13 +17,15 @@ import { CaritaButtonComponent } from './carita-button/carita-button.component';
     LoandTermSliderComponent,
     AppCustomRatingComponent,
     QuestionListComponent,
-    CaritaButtonComponent
+    CaritaButtonComponent,
+    MapComponent
   ],
   exports: [
     CreateQuestionComponent,
     LoandTermSliderComponent,
     AppCustomRatingComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,

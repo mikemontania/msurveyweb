@@ -25,6 +25,7 @@
                   <option value="RANGE">Rango</option>
                   <option value="STARS">Estrellas</option>
                   <option value="CARITAS">Caritas</option>
+                  <option value="MAPA">Ubicación</option>
                 </select>
               </div>
             </div>
@@ -85,13 +86,9 @@
               <div *ngIf="question.questionType == 'CHECKBOX'  ">
                 <div *ngFor="let option of createRange(question.amount); let i = index">
                   <div class="form-check">
-                    <input class="form-check-input"
-                      type="checkbox"
-                      [name]="'pregunta3_opcion' + (i+1)"
-                      [id]="'checkbox' + i"
-                      [value]="'opcion' + (i + 1)">
-                    <label class="form-check-label"
-                      [for]="'checkbox' + i">
+                    <input class="form-check-input" type="checkbox" [name]="'pregunta3_opcion' + (i+1)"
+                      [id]="'checkbox' + i" [value]="'opcion' + (i + 1)">
+                    <label class="form-check-label" [for]="'checkbox' + i">
                       {{ 'Opción ' + (i + 1) }}
                     </label>
                     <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
@@ -105,13 +102,9 @@
               <div *ngIf="  question.questionType == 'RADIOBUTTON'">
                 <div *ngFor="let option of createRange(question.amount); let i = index">
                   <div class="form-check">
-                    <input class="form-check-input"
-                      type="radio"
-                      [name]="'pregunta1'"
-                      [id]="'radio' + i"
+                    <input class="form-check-input" type="radio" [name]="'pregunta1'" [id]="'radio' + i"
                       [value]="'opcion' + (i + 1)">
-                    <label class="form-check-label"
-                      [for]="'radio' + i">
+                    <label class="form-check-label" [for]="'radio' + i">
                       {{ 'Opción ' + (i + 1) }}
                     </label>
                     <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
@@ -120,9 +113,11 @@
                   </div>
                 </div>
               </div>
+              
+                <app-map  *ngIf="  question.questionType == 'MAPA'"(locationSelected)="handleLocationSelected($event)"></app-map>
 
 
-              <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
+              <!--    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
               [caritas]="[
                 { name: 'Muy insatisfecho', image: 'assets/caritas/1.png' },
                 { name: 'Insatisfecho', image: 'assets/caritas/2.png' },
@@ -131,8 +126,15 @@
                 { name: 'Muy Satisfecho', image: 'assets/caritas/5.png' }
               ]"
               (caritaSelected)="handleCaritaSelected($event)"
-            ></app-carita-button>
- 
+            ></app-carita-button> -->
+              <app-carita-button *ngIf="  question.questionType == 'CARITAS'" [caritas]="[
+              { name: 'Muy insatisfecho', image: 'assets/caritas/muytriste.png' },
+              { name: 'Insatisfecho', image: 'assets/caritas/triste.png' },
+              { name: 'No lo se', image: 'assets/caritas/sinemocion.png' },
+              { name: 'Satisfecho', image: 'assets/caritas/contento.png' },
+              { name: 'Muy Satisfecho', image: 'assets/caritas/muycontento.png' }
+            ]" (caritaSelected)="handleCaritaSelected($event)"></app-carita-button>
+
               <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
                 [totalStars]="question.amount"></app-custom-rating>
             </div>

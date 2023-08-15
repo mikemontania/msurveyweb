@@ -1,10 +1,14 @@
-<div class="caritas-container">
-  <div *ngFor="let carita of caritas">
-    <div class="carita-img">
-    <img class="carita-button" [class.selected]="carita.name === selectedCarita" [src]="carita.image" [alt]="carita.name"
-      (click)="toggleSelection(carita.name)"/>
-  
+<div class="carita-gallery">
+  <div class="carita-item" *ngFor="let carita of caritas" (click)="toggleSelection(carita.name)" [class.selected]="carita.name === selectedCarita">
+    <img [src]="carita.image" alt="Carita" class="carita-img">
   </div>
-    <p class="carita-name">{{ carita.name }}</p>
+</div>
+
+<div class="card-description mt-3 mb-3 " [class.show]="selectedCarita">
+  <div class="card">
+
+    <p class="mb-0 small font-weight-medium text-uppercase text-muted">
+      {{ selectedCarita }}
+    </p>
   </div>
 </div>

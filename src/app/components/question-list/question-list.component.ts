@@ -14,7 +14,7 @@ export class QuestionListComponent implements OnInit, OnChanges {
   optionDescriptions: string[] = [];
   rangeValue: number = 0; // Agregar esta propiedad para el rango
   quantity: number = 0;   // Agregar esta propiedad para la cantidad de estrellas
-
+  selectedCarita ='';
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,7 +57,10 @@ export class QuestionListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     console.log(this.questions);
   }
-  handleCaritaSelected(e){}
+  handleCaritaSelected(e){
+    this.selectedCarita = e;
+
+  }
   removeQuestion(index: number): void {
     if (index >= 0 && index < this.questions.length) {
       this.questions.splice(index, 1);
@@ -67,5 +70,5 @@ export class QuestionListComponent implements OnInit, OnChanges {
   createRange(length: number): number[] {
     return Array.from({ length }, (_, i) => i);
   }
-
+  handleLocationSelected(event){}
 }

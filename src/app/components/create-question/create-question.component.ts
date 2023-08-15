@@ -37,6 +37,7 @@ export class CreateQuestionComponent {
   handleCaritaSelected(caritaName: string) {
     //this.selectedCarita = caritaName;
   }
+  handleLocationSelected(event){}
   async onSubmit() {
     const newQuestion = { ...this.question }; // Crear una nueva instancia de Question
 

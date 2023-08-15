@@ -20,7 +20,7 @@
       </app-loand-term-slider>
 
  <!-- caritas -->
-      <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
+   <!--    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
       [caritas]="[
         { name: 'Muy insatisfecho', image: 'assets/caritas/1.png' },
         { name: 'Insatisfecho', image: 'assets/caritas/2.png' },
@@ -29,9 +29,24 @@
         { name: 'Muy Satisfecho', image: 'assets/caritas/5.png' }
       ]"
       (caritaSelected)="handleCaritaSelected($event)"
-    ></app-carita-button>
+    ></app-carita-button> -->
+    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
+    [caritas]="[
+      { name: 'Muy insatisfecho', image: 'assets/caritas/muytriste.png' },
+      { name: 'Insatisfecho', image: 'assets/caritas/triste.png' },
+      { name: 'No lo se', image: 'assets/caritas/sinemocion.png' },
+      { name: 'Satisfecho', image: 'assets/caritas/contento.png' },
+      { name: 'Muy Satisfecho', image: 'assets/caritas/muycontento.png' }
+    ]"
+    (caritaSelected)="handleCaritaSelected($event)"
+  ></app-carita-button>
 
-      <!-- Selección Múltiple, varias opciones -->
+      <!-- MApa -->
+
+      <app-map  *ngIf="  question.questionType == 'MAPA'"(locationSelected)="handleLocationSelected($event)"></app-map>
+
+
+
       <!-- Respuestas para preguntas -->
       <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON' && question.Choices">
         <div *ngFor="let ans of question.Choices; let j = index">
