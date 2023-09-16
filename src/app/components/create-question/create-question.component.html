@@ -2,135 +2,129 @@
   <form (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-12 col-lg-4">
-           <h3 class="section-title">Configuración de Pregunta</h3>
-          <div class="row">
-            <div class="row mb-3">
-              <label for="questionText" class="col-sm-3 col-form-label">Pregunta</label>
-              <div class="col-sm-9">
-                <textarea type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
-                  placeholder="Escriba la pregunta" name="questionText" rows="2"></textarea>
-              </div>
+        <h3 class="section-title">Configuración de Pregunta</h3>
+        <div class="row">
+          <div class="row mb-3">
+            <label for="questionText" class="col-sm-3 col-form-label">Pregunta</label>
+            <div class="col-sm-9">
+              <textarea type="text" id="questionText" class="form-control" [(ngModel)]="question.questionText"
+                placeholder="Escriba la pregunta" name="questionText" rows="2"></textarea>
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <label for="questionType" class="col-sm-3 col-form-label">Tipo</label>
-              <div class="col-sm-9">
-                <select id="{{question.questionType}}" class="form-control" [(ngModel)]="question.questionType"
-                  name="{{question.questionType}}" (ngModelChange)="onQuestionTypeChange()">
-                  <option value="INPUT">Respuesta corta, de texto</option>
-                  <option value="TEXTAREA">Respuesta larga, de texto</option>
-                  <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
-                  <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
-                  <option value="RANGE">Rango</option>
-                  <option value="STARS">Estrellas</option>
-                  <option value="CARITAS">Caritas</option>
-                  <option value="MAPA">Ubicación</option>
-                </select>
-              </div>
+          <div class="row mb-3">
+            <label for="questionType" class="col-sm-3 col-form-label">Tipo</label>
+            <div class="col-sm-9">
+              <select id="{{question.questionType}}" class="form-control" [(ngModel)]="question.questionType"
+                name="{{question.questionType}}" (ngModelChange)="onQuestionTypeChange()">
+                <option value="INPUT">Respuesta corta, de texto</option>
+                <option value="TEXTAREA">Respuesta larga, de texto</option>
+                <option value="CHECKBOX">Selección Múltiple, varias opciones</option>
+                <option value="RADIOBUTTON">Selección Múltiple, una opcion</option>
+                <option value="RANGE">Rango</option>
+                <option value="STARS">Estrellas</option>
+                <option value="CARITAS">Caritas</option>
+                <option value="MAPA">Ubicación</option>
+              </select>
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <label for="obligatory" class="col-sm-3 col-form-label">Requerido</label>
-              <div class="col-sm-9">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="obligatory" [(ngModel)]="question.obligatory"
-                    name="obligatory" required>
-                </div>
-              </div>
-            </div>
-
-            <div class="row mb-3"
-              *ngIf="question.questionType != 'INPUT' && question.questionType != 'TEXTAREA' && question.questionType != 'RANGE'">
-              <label for="obligatory" class="col-sm-3 col-form-label">Items</label>
-              <div class="col-sm-9">
-                <app-loand-term-slider [initialValue]="question.amount" [minValue]="1" [maxValue]="10"
-                  [unitText]="'Item'" (initialValueChange)="onSliderValueChange($event)">
-                </app-loand-term-slider>
-              </div>
-            </div>
-
-            <div class="row mb-3" *ngIf=" question.questionType == 'RANGE'">
-              <label for="amount" class="col-sm-3 col-form-label">Cantidad</label>
-              <div class="col-sm-9">
-                <input class="form-control" type="number" id="amount" [(ngModel)]="question.amount" name="obligatory"
-                  min="1" max="10000000" required>
+          <div class="row mb-3">
+            <label for="obligatory" class="col-sm-3 col-form-label">Requerido</label>
+            <div class="col-sm-9">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="obligatory" [(ngModel)]="question.obligatory"
+                  name="obligatory" required>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success mt-5"><i class="fa fa-plus"></i> Siguiente Pregunta</button>
-        </div>
-      <div class="col-md-12 col-lg-8">
-           <h3 class="section-title">Vista Previa</h3>
-          <div class="row">
-            <div class="mb-3">
-              <label for="inputPregunta1" *ngIf="question.questionText && question.questionText.length > 1"
-                class="form-label">{{question.questionText}}</label>
-              <label for="inputPregunta1" *ngIf="!question.questionText || question.questionText.length <= 1"
-                class="form-label">¿ Cual es la pregunta ?</label>
-            </div>
-            <div class="mb-3">
-              <!-- Respuesta corta, de texto -->
-              <input type="text" class="form-control" id="inputPregunta1" name="pregunta1"
-                *ngIf="question.questionType == 'INPUT'" disabled="true">
-              <!-- Respuesta larga, de texto -->
 
-              <textarea class="form-control" id="textareaPregunta1" name="pregunta1" rows="2"
-                *ngIf="question.questionType == 'TEXTAREA'" disabled="true"></textarea>
-              <!-- Rango -->
-              <app-loand-term-slider *ngIf="question.questionType == 'RANGE'" [initialValue]="rangeValue" [minValue]="1"
-                [maxValue]="question.amount" [unitText]="'Item'" (initialValueChange)="rangeValue">
+          <div class="row mb-3"
+            *ngIf="question.questionType != 'INPUT' && question.questionType != 'TEXTAREA' && question.questionType != 'STARS' && question.questionType != 'RANGE' && question.questionType != 'CARITAS'&& question.questionType != 'MAPA'">
+            <label for="obligatory" class="col-sm-3 col-form-label">Items</label>
+            <div class="col-sm-9">
+              <app-loand-term-slider [initialValue]="question.amount" [minValue]="1" [maxValue]="10" [unitText]="'Item'"
+                (initialValueChange)="onSliderValueChange($event)">
               </app-loand-term-slider>
+            </div>
+          </div>
 
-              <div *ngIf="question.questionType == 'CHECKBOX'  ">
-                <div *ngFor="let option of createRange(question.amount); let i = index">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" [name]="'pregunta3_opcion' + (i+1)"
-                      [id]="'checkbox' + i" [value]="'opcion' + (i + 1)">
-                    <label class="form-check-label" [for]="'checkbox' + i">
-                      {{ 'Opción ' + (i + 1) }}
-                    </label>
-                    <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
-                      [placeholder]="'Descripción opción ' + (i + 1)" name="descripcion{{ i }}"
-                      [ngModelOptions]="{ standalone: true }">
-                  </div>
+          <div class="row mb-3" *ngIf=" question.questionType == 'RANGE'">
+            <label for="amount" class="col-sm-3 col-form-label">Cantidad</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="number" id="amount" [(ngModel)]="question.amount" name="obligatory"
+                min="1" max="10000000" required>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-5"><i class="fa fa-plus"></i> Siguiente Pregunta</button>
+      </div>
+      <div class="col-md-12 col-lg-8">
+        <h3 class="section-title">Vista Previa</h3>
+        <div class="row">
+          <div class="mb-3">
+            <label for="inputPregunta1" *ngIf="question.questionText && question.questionText.length > 1"
+              class="form-label">{{question.questionText}}</label>
+            <label for="inputPregunta1" *ngIf="!question.questionText || question.questionText.length <= 1"
+              class="form-label">¿ Cual es la pregunta ?</label>
+          </div>
+          <div class="mb-3">
+            <!-- Respuesta corta, de texto -->
+            <input type="text" class="form-control" id="inputPregunta1" name="pregunta1"
+              *ngIf="question.questionType == 'INPUT'" disabled="true">
+            <!-- Respuesta larga, de texto -->
+
+            <textarea class="form-control" id="textareaPregunta1" name="pregunta1" rows="2"
+              *ngIf="question.questionType == 'TEXTAREA'" disabled="true"></textarea>
+            <!-- Rango -->
+            <app-loand-term-slider *ngIf="question.questionType == 'RANGE'" [initialValue]="rangeValue" [minValue]="1"
+              [maxValue]="question.amount" [unitText]="'Item'" (initialValueChange)="rangeValue">
+            </app-loand-term-slider>
+
+            <div *ngIf="question.questionType == 'CHECKBOX'  ">
+              <div *ngFor="let option of createRange(question.amount); let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [name]="'pregunta3_opcion' + (i+1)"
+                    [id]="'checkbox' + i" [value]="'opcion' + (i + 1)">
+                  <label class="form-check-label" [for]="'checkbox' + i">
+                    {{ 'Opción ' + (i + 1) }}
+                  </label>
+                  <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
+                    [placeholder]="'Descripción opción ' + (i + 1)" name="descripcion{{ i }}"
+                    [ngModelOptions]="{ standalone: true }">
                 </div>
               </div>
+            </div>
 
 
-              <div *ngIf="  question.questionType == 'RADIOBUTTON'">
-                <div *ngFor="let option of createRange(question.amount); let i = index">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" [name]="'pregunta1'" [id]="'radio' + i"
-                      [value]="'opcion' + (i + 1)">
-                    <label class="form-check-label" [for]="'radio' + i">
-                      {{ 'Opción ' + (i + 1) }}
-                    </label>
-                    <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
-                      [placeholder]="'Descripción opción ' + (i + 1)" name="descripcion{{ i }}"
-                      [ngModelOptions]="{ standalone: true }">
-                  </div>
+            <div *ngIf="  question.questionType == 'RADIOBUTTON'">
+              <div *ngFor="let option of createRange(question.amount); let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" [name]="'pregunta1'" [id]="'radio' + i"
+                    [value]="'opcion' + (i + 1)">
+                  <label class="form-check-label" [for]="'radio' + i">
+                    {{ 'Opción ' + (i + 1) }}
+                  </label>
+                  <input class="form-control" type="text" [(ngModel)]="optionDescriptions[i]"
+                    [placeholder]="'Descripción opción ' + (i + 1)" name="descripcion{{ i }}"
+                    [ngModelOptions]="{ standalone: true }">
                 </div>
               </div>
-              
-                <app-map  *ngIf="  question.questionType == 'MAPA'"(locationSelected)="handleLocationSelected($event)"></app-map>
-
- 
-              <app-carita-button *ngIf="  question.questionType == 'CARITAS'" [caritas]="[
+            </div>
+            <app-map *ngIf="  question.questionType == 'MAPA'"
+              (locationSelected)="handleLocationSelected($event)"></app-map>
+            <app-carita-button *ngIf="  question.questionType == 'CARITAS'" [caritas]="[
               { name: 'Muy insatisfecho', image: 'assets/caritas/muytriste.png' },
               { name: 'Insatisfecho', image: 'assets/caritas/triste.png' },
               { name: 'No lo se', image: 'assets/caritas/sinemocion.png' },
               { name: 'Satisfecho', image: 'assets/caritas/contento.png' },
               { name: 'Muy Satisfecho', image: 'assets/caritas/muycontento.png' }
             ]" (caritaSelected)="handleCaritaSelected($event)"></app-carita-button>
-
-              <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
-                [totalStars]="question.amount"></app-custom-rating>
-            </div>
+            <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
+              [totalStars]="question.amount"></app-custom-rating>
           </div>
         </div>
+      </div>
     </div>
-    
   </form>
 </div>
-
- 

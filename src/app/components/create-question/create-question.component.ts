@@ -98,6 +98,9 @@ export class CreateQuestionComponent {
     this.question.amount = 1;
     this.quantity = 1;
     this.rangeValue = 1;
+    if (this.question.questionType =='STARS') {
+      this.question.amount = 5;
+    }
   }
   createRange(count: number): number[] {
     return Array.from({ length: count }, (_, i) => i);

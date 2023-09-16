@@ -1,9 +1,9 @@
 <div *ngFor="let question of questions; let i = index">
   <div class="col-9">
     <div class="mb-3">
-      <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}<span
-        style="color:red;" *ngIf="question.obligatory">(*)</span></label>
-      <button class="btn btn-link btn-sm ml-2 text-danger" (click)="removeQuestion(i)">        <i class="fas fa-trash-alt"></i>
+      <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}<span style="color:red;"
+          *ngIf="question.obligatory">(*)</span></label>
+      <button class="btn btn-link btn-sm ml-2 text-danger" (click)="removeQuestion(i)"> <i class="fas fa-trash-alt"></i>
       </button>
     </div>
     <div class="mb-3">
@@ -18,42 +18,23 @@
       <app-loand-term-slider *ngIf="question.questionType == 'RANGE'" [initialValue]="responses[i].response"
         [minValue]="1" [maxValue]="question.amount" [unitText]="'Item'" (initialValueChange)="responses[i].response">
       </app-loand-term-slider>
-
- <!-- caritas -->
-   <!--    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
-      [caritas]="[
-        { name: 'Muy insatisfecho', image: 'assets/caritas/1.png' },
-        { name: 'Insatisfecho', image: 'assets/caritas/2.png' },
-        { name: 'No lo se', image: 'assets/caritas/3.png' },
-        { name: 'Satisfecho', image: 'assets/caritas/4.png' },
-        { name: 'Muy Satisfecho', image: 'assets/caritas/5.png' }
-      ]"
-      (caritaSelected)="handleCaritaSelected($event)"
-    ></app-carita-button> -->
-    <app-carita-button *ngIf="  question.questionType == 'CARITAS'"
-    [caritas]="[
+      <!-- caritas -->
+      <app-carita-button *ngIf="  question.questionType == 'CARITAS'" [caritas]="[
       { name: 'Muy insatisfecho', image: 'assets/caritas/muytriste.png' },
       { name: 'Insatisfecho', image: 'assets/caritas/triste.png' },
       { name: 'No lo se', image: 'assets/caritas/sinemocion.png' },
       { name: 'Satisfecho', image: 'assets/caritas/contento.png' },
       { name: 'Muy Satisfecho', image: 'assets/caritas/muycontento.png' }
-    ]"
-    (caritaSelected)="handleCaritaSelected($event)"
-  ></app-carita-button>
-
-      <!-- MApa -->
-
-      <app-map  *ngIf="  question.questionType == 'MAPA'"(locationSelected)="handleLocationSelected($event)"></app-map>
-
-
-
+    ]" (caritaSelected)="handleCaritaSelected($event)"></app-carita-button>
+      <!-- Mapa -->
+      <app-map *ngIf="  question.questionType == 'MAPA'" (locationSelected)="handleLocationSelected($event)"></app-map>
       <!-- Respuestas para preguntas -->
       <div *ngIf="question.questionType == 'CHECKBOX' || question.questionType == 'RADIOBUTTON' && question.Choices">
         <div *ngFor="let ans of question.Choices; let j = index">
           <div class="form-check">
             <input class="form-check-input" type="{{ question.questionType == 'CHECKBOX' ? 'checkbox' : 'radio' }}"
               [name]="question.questionType+i+' '+j" [id]="question.questionType+i+' '+j" [value]="'opcion' + (j + 1)"
-              [(ngModel)]="responses[j].response"> <!-- Corrección aquí -->
+              [(ngModel)]="responses[j].response">
             <label class="form-check-label"
               [for]="question.questionType == 'CHECKBOX' ? 'checkbox' + question.codQuestion + j : 'radio' + question.codQuestion + j">
               {{ (j + 1) +'.- ' }}{{ ans.choiceText }}
@@ -64,6 +45,6 @@
       <!-- Estrellas -->
       <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
         [totalStars]="question.amount"></app-custom-rating>
-      </div>
     </div>
   </div>
+</div>
