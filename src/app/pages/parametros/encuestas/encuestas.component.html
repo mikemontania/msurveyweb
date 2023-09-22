@@ -36,8 +36,9 @@
                         <th>creationDate</th>
                         <th>codUser</th>
                         <th>createdAt</th>
-                        <th>updatedAt</th> 
+                        <th>updatedAt</th>
                          <th>Editar</th>
+                         <th>Resultados</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,8 +56,13 @@
                                 <i class="fa fa-pencil"></i>
                             </button>
                         </td>
+                        <td>
+                          <button class="btn btn-info btn-circle" [routerLink]="['/parametros/resultado', survey.codSurvey]" type="button">
+                              <i class="fa fa-chart-bar"></i>
+                          </button>
+                      </td>
                     </tr>
-                   
+
                 </tbody>
             </table>
         </div>

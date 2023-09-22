@@ -19,7 +19,10 @@ export class Question {
   createdBy?: string;
   updatedAt?: Date;
   updatedBy?: string;
-
+  resultsText?: any;
+  resultChartChoices?: any;
+  resultChartValue?: any;
+  resultAverage?: number;
 
 
     constructor(

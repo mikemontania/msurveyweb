@@ -1,0 +1,82 @@
+<!-- Botones para cambiar el tipo de gráfico -->
+<!-- Botones para cambiar el tipo de gráfico -->
+<button
+  (click)="changeChartType('bar')"
+  class="btn btn-primary"
+  [disabled]="currentChartType === 'bar'"
+>
+  Gráfico de barras <i class="bi bi-bar-chart"></i>
+</button>
+
+<button
+  (click)="changeChartType('pie')"
+  class="btn btn-primary"
+  [disabled]="currentChartType === 'pie'"
+>
+  Gráfico de tarta <i class="bi bi-pie-chart-fill"></i>
+</button>
+
+<button
+  (click)="changeChartType('advanced-pie')"
+  class="btn btn-primary"
+  [disabled]="currentChartType === 'advanced-pie'"
+>
+  Gráfico de tarta avanzado <i class="bi bi-pie-chart"></i>
+</button>
+
+<button
+  (click)="changeChartType('pie-grid')"
+  class="btn btn-primary"
+  [disabled]="currentChartType === 'pie-grid'"
+>
+  Gráfico de tarta grid <i class="bi bi-grid-3x3-gap-fill"></i>
+</button>
+
+<!-- Mostrar el gráfico según el tipo seleccionado -->
+<div *ngIf="currentChartType === 'bar'">
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)"
+  ></ngx-charts-bar-vertical>
+</div>
+
+<div *ngIf="currentChartType === 'pie'">
+  <ngx-charts-pie-chart
+    [view]="view"
+    [results]="single"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [explodeSlices]="false"
+    (select)="onSelect($event)"
+  ></ngx-charts-pie-chart>
+</div>
+
+<div *ngIf="currentChartType === 'advanced-pie'">
+  <ngx-charts-advanced-pie-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    (select)="onSelect($event)"
+  ></ngx-charts-advanced-pie-chart>
+</div>
+<div *ngIf="currentChartType === 'pie-grid'">
+  <ngx-charts-pie-grid
+    [view]="view"
+    [results]="single"
+    [scheme]="colorScheme"
+    (select)="onSelect($event)"
+  ></ngx-charts-pie-grid>
+</div>
+
+
+

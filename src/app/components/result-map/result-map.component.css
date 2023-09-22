@@ -1,0 +1,34 @@
+.result-text-map {
+  max-height: 300px; /* Establece la altura máxima de la lista */
+  overflow-y: auto; /* Agrega scroll vertical si es necesario */
+}
+.result-map {
+  width: 100%;
+  height: 400px;
+}
+/* Estilo para el botón rojo */
+.map-button.red {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+}
+
+/* Estilo para el botón verde */
+.map-button.green {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+}
+
+/* Estilo para el icono del botón */
+.map-button i {
+  margin-right: 5px; /* Ajusta el espacio entre el icono y el texto según tus necesidades */
+}

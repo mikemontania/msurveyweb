@@ -37,6 +37,17 @@ export class ApiService {
       })
     );
   }
+  getSurveyResultById(surveyId: number): Observable<any> {
+    const url = `${BASE_URL}survey/result/${surveyId}`;
+    return this.http.get<any>(url).pipe(
+      map((resp: any) => resp),
+      catchError(e => {
+        console.error('ERROR', e.error);
+        Swal.fire(e.error.header, e.error.message, 'error');
+        return throwError(() => e);
+      })
+    );
+  }
 
   // Survey
 

@@ -43,7 +43,7 @@
         </div>
       </div>
       <!-- Estrellas -->
-      <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"
+      <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="quantity"  [bloqueado]="true"
         [totalStars]="question.amount"></app-custom-rating>
     </div>
   </div>

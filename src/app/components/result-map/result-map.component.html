@@ -1,0 +1,27 @@
+<div class="result-container">
+  <div class="result-text-map">
+    <div class="card" *ngFor="let result of results; let i = index">
+      <div class="card-header">
+        <i class="fa-solid fa-user"></i> {{ result.client }}
+      </div>
+      <div class="card-body">
+        {{ result.data }}
+      </div>
+      <div class="button-group">
+        <button (click)="showLocationOnMap(result.data)" class="btn btn-primary">
+          <i class="fa-solid fa-map-marker-alt"></i> Mostrar Mapa
+        </button>
+        <button (click)="copyMapUrlToClipboard()" class="btn btn-primary">
+          <i class="fa-solid fa-copy"></i> Copiar URL del Mapa
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div #resultMap class="result-map"></div>
+
+
+  <button class="btn btn-success" (click)="exportToExcel()">
+    <i class="fas fa-download"></i> Exportar Datos
+  </button>
+</div>

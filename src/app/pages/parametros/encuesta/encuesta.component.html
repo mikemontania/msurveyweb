@@ -1,42 +1,12 @@
 
 <section>
-  
+
   <div class="card-body p-3">
     <div class="card-header  bg-dark text-white">
       <h4 *ngIf="!survey.codSurvey" class="m-b-0 text-white">Crear Encuesta</h4>
       <h4 *ngIf="survey.codSurvey" class="m-b-0 text-white">Actualizar Encuesta</h4>
     </div>
     <form #surveyForm="ngForm">
- <!--      <div class="header">
-        <img src="../../../../assets/images/grupocavallaro3.png" alt="Logo de Encuesta">
-        <div class="text-center">
-          <h1>
-            <ng-container *ngIf="!titleEditMode">{{ survey.title }}</ng-container>
-            <ng-container *ngIf="titleEditMode">
-              <input type="text" class="form-control" [(ngModel)]="survey.title" name=" title">
-            </ng-container>
-          </h1>
-          <p>
-            <ng-container *ngIf="!descriptionEditMode">{{ survey.description }}</ng-container>
-            <ng-container *ngIf="descriptionEditMode">
-              <textarea class="form-control" [(ngModel)]="survey.description" name="description"></textarea>
-            </ng-container>
-          </p>
-          <button class="btn btn-sm btn-primary" *ngIf="!titleEditMode" (click)="toggleTitleEditMode()">
-            <i class="fa fa-edit"></i> Editar Título
-          </button>
-          <button class="btn btn-sm btn-primary" *ngIf="titleEditMode" (click)="toggleTitleEditMode()">
-            <i class="fa fa-save"></i> Vista previa Título
-          </button>
-          <button class="btn btn-sm btn-primary" *ngIf="!descriptionEditMode" (click)="toggleDescriptionEditMode()">
-            <i class="fa fa-edit"></i> Editar Descripción
-          </button>
-          <button class="btn btn-sm btn-primary" *ngIf="descriptionEditMode" (click)="toggleDescriptionEditMode()">
-            <i class="fa fa-save"></i> Vista previa Descripción
-          </button>
-        </div>
-      </div> -->
-
 
       <div class="container mt-4">
         <h2>Datos de cabecera para encuesta </h2>
@@ -53,7 +23,7 @@
             <label for="image" class="form-label">Imagen</label>
             <input type="file" class="form-control" id="image" (change)="onImageChange($event)" required>
           </div>
-         
+
         </form>
       </div>
 
@@ -87,4 +57,4 @@
 
     </form>
   </div>
-</section>  
+</section>

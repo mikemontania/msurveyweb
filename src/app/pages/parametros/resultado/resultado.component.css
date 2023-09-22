@@ -1,0 +1,35 @@
+ .header {
+     background-color: #007BFF;
+     color: #fff;
+     padding: 10px;
+     display: flex;
+     align-items: center;
+ }
+
+ .header h1 {
+     margin: 0;
+
+
+ }
+ .header div{
+ width: 100%;
+ 
+ }
+
+ .header p {
+     margin: 0;
+     font-size: 1.2rem;
+
+ }
+
+ .header img {
+     width: 100px;
+     margin-right: 10px;
+     background-color: #fff;
+     border-radius: 3px;
+ }
+
+ .navbar-toggler-icon {
+     color: #fff;
+
+ }

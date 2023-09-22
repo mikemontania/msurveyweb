@@ -1,0 +1,44 @@
+<section>
+  <div class="toolbar" role="banner">
+    <a href="https://www.cavallaro.com.py">
+      <img width="150" alt="Logo" src="../../../../assets/images/grupocavallaro3.png" />
+    </a>
+    <div class="text-center">
+      <h1>{{ survey?.title }}</h1>
+      <p>{{ survey?.description }}</p>
+    </div>
+  </div>
+  <div class="card-body  container">
+    <div *ngFor="let question of questions; let i = index">
+      <div class="col-9">
+        <div class="mb-3">
+          <label for="inputPregunta1" class="form-label">{{(i+1)}}.- {{ question.questionText }}<span style="color:red;"
+              *ngIf="question.obligatory">(*)</span></label>
+
+        </div>
+
+        <div class="mb-3">
+          <!-- Respuesta corta, de texto -->
+          <app-result-text *ngIf="question.questionType == 'INPUT' ||question.questionType == 'TEXTAREA'"
+            [results]="question.resultsText"></app-result-text>
+
+          <app-result-charts
+            *ngIf="question.questionType == 'RANGE' || question.questionType == 'CARITAS' || question.questionType == 'CHECKBOX'  || question.questionType == 'RADIOBUTTON'"
+            [question]="question"></app-result-charts>
+
+
+
+          <!-- Mapa -->
+          <app-result-map *ngIf="  question.questionType == 'MAPA'" [results]="question.resultsText"></app-result-map>
+
+
+          <!-- Estrellas -->
+          <app-custom-rating *ngIf="question.questionType == 'STARS'" [(rating)]="question.resultAverage"
+            [bloqueado]="true" [totalStars]="5"></app-custom-rating>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>

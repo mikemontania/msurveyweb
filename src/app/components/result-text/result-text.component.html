@@ -1,0 +1,14 @@
+<div class="result-text">
+  <div class="card" *ngFor="let result of resultList; let i = index">
+    <div class="card-header">
+      <i class="fa-solid fa-user"></i> {{ result.client }}
+    </div>
+    <div class="card-body">
+      {{ result.data }}
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-success" (click)="exportToExcel()">
+  <i class="fas fa-download"></i> Exportar Datos
+</button>

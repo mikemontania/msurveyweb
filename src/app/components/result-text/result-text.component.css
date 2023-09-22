@@ -1,0 +1,4 @@
+.result-text {
+  max-height: 300px; /* Establece la altura máxima de la lista */
+  overflow-y: auto; /* Agrega scroll vertical si es necesario */
+}
